@@ -1,0 +1,66 @@
+{
+  "artifacts": {
+    "seed_level_csv": "results\\learned_torch_ibc\\seed_level.csv",
+    "summary_csv": "results\\learned_torch_ibc\\summary.csv",
+    "summary_json": "results\\learned_torch_ibc\\summary.json"
+  },
+  "calibrated_high_N_utility_gain_over_raw_torch": 0.038790762418667635,
+  "demo_n": 512,
+  "experiment": "learned_torch_ibc",
+  "model_metadata": {
+    "feature_mode": "toy_visible",
+    "final_train_loss": 0.012292784871533513,
+    "hidden_dim": 96,
+    "initial_train_loss": 1.6582202911376953,
+    "loss_decrease": 1.6459275062661618,
+    "model_type": "PyTorch MLP EBM",
+    "num_features": 9,
+    "training_objective": "InfoNCE-style contrastive classification over one expert/high-value action and K negatives"
+  },
+  "n_values": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128
+  ],
+  "pool_n": 3072,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "smoke": false,
+  "strongest_torch_ibc_artifact": {
+    "N": 128,
+    "compute_latency_proxy": 128.0,
+    "contact_feasibility_penalty": 8.099798305570978e-05,
+    "deployment_gate": "stop_early",
+    "energy_evaluations": 128,
+    "energy_utility_rank_correlation": 0.6559555459869486,
+    "exact_expected_utility": 1.5846908391286514,
+    "exact_law_abs_error": 0.004337368766037963,
+    "high_n_regret": 0.07773840453807268,
+    "invalid_action_rate": 5.474465669700253e-16,
+    "jerk_smoothness_penalty": 0.008111476499688328,
+    "learned_model": "pytorch_mlp_ibc_ebm",
+    "low_energy_tail_invalid_rate": 0.0,
+    "low_energy_tail_real_utility": 1.5639776796458642,
+    "marginal_utility_per_added_candidate": 0.0006244050602654712,
+    "mc_ci_high": 1.5859629378096527,
+    "mc_ci_low": 1.5747440029155741,
+    "mc_mean_utility": 1.5803534703626134,
+    "model": "raw_torch_ebm",
+    "oracle_minus_energy_gap": 0.07773840453807268,
+    "seed": 2,
+    "selected_energy": 1.2087699918992776,
+    "selected_real_utility": 1.5846908391286514,
+    "selected_score": -1.2087699918992776,
+    "success_rate": 0.9999999921643548,
+    "tail_rank_correlation": 0.4081959706959707,
+    "task": "multimodal"
+  }
+}

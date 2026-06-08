@@ -1,0 +1,142 @@
+{
+  "all_required_figures_present": true,
+  "claims": [
+    {
+      "category": "theorem claims",
+      "claim": "The finite tie-aware Best-of-N law predicts selected real utility for a fixed score/utility pool.",
+      "evidence": "results/exact_law/summary.json and results/exact_law/validation.csv",
+      "status": "SUPPORTED"
+    },
+    {
+      "category": "controlled EBM toy claims",
+      "claim": "Controlled contact and multimodal toys exhibit low-energy tail miscalibration: selected energy decreases while real utility falls.",
+      "evidence": "results/controlled_energy_tail/summary.csv",
+      "status": "SUPPORTED"
+    },
+    {
+      "category": "learned IBC-style EBM claims",
+      "claim": "A small learned contrastive EBM can over-optimize an observation-limited low-energy tail, and calibrated/value-shaped scoring improves high-N utility.",
+      "evidence": "results/learned_ibc/summary.csv and results/learned_ibc/summary.json",
+      "status": "SUPPORTED"
+    },
+    {
+      "category": "PyTorch learned EBM claims",
+      "claim": "A PyTorch MLP IBC-style EBM trains with decreasing contrastive loss and produces finite exact-law selected-utility curves, showing the aligned-tail regime alongside the failure regime.",
+      "evidence": "results/learned_torch_ibc/summary.csv and results/learned_torch_ibc/summary.json",
+      "status": "SUPPORTED"
+    },
+    {
+      "category": "Meta-World benchmark claims",
+      "claim": "The repository produces a guarded Meta-World reach-v3 benchmark artifact with finite reward, energy, compute, and exact-law diagnostics.",
+      "evidence": "results/benchmarks/metaworld/summary.json and results/benchmarks/metaworld/summary.csv",
+      "status": "SUPPORTED"
+    },
+    {
+      "category": "multimodal action claims",
+      "claim": "A tail-aligned EBM can represent two valid modes better than explicit MSE regression, while a shortcut energy can still fail at high N.",
+      "evidence": "results/multimodal_action/summary.json",
+      "status": "SUPPORTED"
+    },
+    {
+      "category": "optimization/latency claims",
+      "claim": "More EBM inference compute trades energy evaluations and latency proxy against real utility, and added candidates can over-optimize energy.",
+      "evidence": "results/optimization_budget/summary.csv",
+      "status": "SUPPORTED"
+    },
+    {
+      "category": "repair/calibration claims",
+      "claim": "Pilot-label calibration, value shaping, and support penalties repair selected-tail utility in controlled toy settings.",
+      "evidence": "results/repair/summary.json and results/repair/summary.csv",
+      "status": "SUPPORTED"
+    },
+    {
+      "category": "repair ablation claims",
+      "claim": "Pilot-label count and support-penalty sweeps quantify how much repair signal is needed to recover high-N selected-tail utility.",
+      "evidence": "results/ablations/summary.json and results/ablations/summary.csv",
+      "status": "SUPPORTED"
+    },
+    {
+      "category": "optional benchmark claims",
+      "claim": "Optional benchmark adapters are guarded and do not support core claims unless dependencies and runs are present.",
+      "evidence": "results/optional_benchmarks/summary.json and docs/benchmark_plan.md",
+      "status": "PARTIAL"
+    },
+    {
+      "category": "unsupported future robotics claims",
+      "claim": "Real robot validation is future work, not a supported repository claim.",
+      "evidence": "No real-robot artifacts are present.",
+      "status": "UNSUPPORTED"
+    },
+    {
+      "category": "forbidden/overclaim claims",
+      "claim": "Forbidden clone and overclaim statements are treated as disallowed, not supported findings.",
+      "evidence": "docs/differentiation_from_wam_jepa_diffusion.md and docs/claims.md",
+      "status": "SUPPORTED"
+    }
+  ],
+  "not_clone_audit": [
+    {
+      "check": "differentiation doc exists",
+      "passed": true
+    },
+    {
+      "check": "EBM-specific energy setup exists",
+      "passed": true
+    },
+    {
+      "check": "S = -E convention exists",
+      "passed": true
+    },
+    {
+      "check": "learned EBM/IBC-style policy exists",
+      "passed": true
+    },
+    {
+      "check": "PyTorch neural EBM artifact exists",
+      "passed": true
+    },
+    {
+      "check": "Meta-World benchmark artifact exists",
+      "passed": true
+    },
+    {
+      "check": "action/trajectory energy scorer exists",
+      "passed": true
+    },
+    {
+      "check": "artifacts report low-energy tail metrics",
+      "passed": true
+    },
+    {
+      "check": "raw EBM compared to calibrated/value-shaped EBM",
+      "passed": true
+    },
+    {
+      "check": "compute/latency proxy reported",
+      "passed": true
+    },
+    {
+      "check": "no real-robot validation claim in supported claims",
+      "passed": true
+    },
+    {
+      "check": "does not imply EBMs always work",
+      "passed": true
+    },
+    {
+      "check": "does not imply Best-of-N always helps",
+      "passed": true
+    },
+    {
+      "check": "does not duplicate WAM/JEPA/diffusion failure wording as the EBM claim",
+      "passed": true
+    }
+  ],
+  "summary": {
+    "not_clone_checks_passed": 14,
+    "not_clone_checks_total": 14,
+    "partial": 1,
+    "supported": 10,
+    "unsupported": 1
+  }
+}

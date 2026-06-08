@@ -1,0 +1,41 @@
+{
+  "artifacts": {
+    "summary_csv": "results\\optional_benchmarks\\summary.csv",
+    "summary_json": "results\\optional_benchmarks\\summary.json"
+  },
+  "benchmarks": [
+    {
+      "available": true,
+      "benchmark": "gymnasium",
+      "claim_boundary": "Optional adapters are guarded and do not support real-robot claims.",
+      "status": "AVAILABLE_NOT_RUN_BY_CORE_SCRIPT"
+    },
+    {
+      "available": false,
+      "benchmark": "d4rl",
+      "claim_boundary": "Optional adapters are guarded and do not support real-robot claims.",
+      "status": "UNSUPPORTED_FUTURE"
+    },
+    {
+      "available": true,
+      "benchmark": "metaworld",
+      "claim_boundary": "Optional adapters are guarded and do not support real-robot claims.",
+      "status": "CORE_GUARDED_ARTIFACT_SEE_RESULTS_BENCHMARKS_METAWORLD"
+    },
+    {
+      "available": true,
+      "benchmark": "mani_skill",
+      "claim_boundary": "Optional adapters are guarded and do not support real-robot claims.",
+      "status": "AVAILABLE_NOT_RUN_BY_CORE_SCRIPT"
+    },
+    {
+      "available": true,
+      "benchmark": "robosuite",
+      "claim_boundary": "Optional adapters are guarded and do not support real-robot claims.",
+      "status": "AVAILABLE_NOT_RUN_BY_CORE_SCRIPT"
+    }
+  ],
+  "claim": "Meta-World support is audited in results/benchmarks/metaworld; other optional benchmark claims remain unsupported until artifacts exist.",
+  "experiment": "optional_benchmarks",
+  "smoke": false
+}

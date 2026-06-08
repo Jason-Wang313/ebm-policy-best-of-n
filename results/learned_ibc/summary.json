@@ -1,0 +1,108 @@
+{
+  "artifacts": {
+    "baselines_csv": "results\\learned_ibc\\baselines.csv",
+    "seed_level_csv": "results\\learned_ibc\\seed_level.csv",
+    "summary_csv": "results\\learned_ibc\\summary.csv",
+    "summary_json": "results\\learned_ibc\\summary.json"
+  },
+  "baselines": [
+    {
+      "baseline": "explicit_mse_regression",
+      "invalid_rate": 1.0,
+      "mean_action_x": 0.040659105186728994,
+      "mean_utility": -1.5074750689270968,
+      "success_rate": 0.0
+    },
+    {
+      "baseline": "nearest_neighbor_demo_action",
+      "invalid_rate": 0.0,
+      "mean_action_x": 0.046717981458449576,
+      "mean_utility": 1.55780052180664,
+      "success_rate": 1.0
+    },
+    {
+      "baseline": "explicit_mse_regression",
+      "invalid_rate": 1.0,
+      "mean_action_x": 0.0046713476368970275,
+      "mean_utility": -1.5438239437147534,
+      "success_rate": 0.0
+    },
+    {
+      "baseline": "nearest_neighbor_demo_action",
+      "invalid_rate": 0.0,
+      "mean_action_x": 0.002716863230579767,
+      "mean_utility": 1.5657143004483158,
+      "success_rate": 1.0
+    },
+    {
+      "baseline": "explicit_mse_regression",
+      "invalid_rate": 1.0,
+      "mean_action_x": -0.002688686271855353,
+      "mean_utility": -1.5443002027042672,
+      "success_rate": 0.0
+    },
+    {
+      "baseline": "nearest_neighbor_demo_action",
+      "invalid_rate": 0.0,
+      "mean_action_x": 0.03709011981991081,
+      "mean_utility": 1.5625678308629147,
+      "success_rate": 1.0
+    }
+  ],
+  "calibrated_high_N_utility_gain_over_raw": 2.820661797316771,
+  "demo_n": 384,
+  "experiment": "learned_ibc_policy",
+  "model_metadata": {
+    "final_train_loss": 0.581582862362989,
+    "model_type": "NumPy linear-feature EBM",
+    "negative_sampling": "Broad continuous action negatives; narrow obstacle-shortcut negatives intentionally undercovered",
+    "num_features": 8,
+    "training_objective": "InfoNCE-style contrastive classification over one expert action and K negatives"
+  },
+  "n_values": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128
+  ],
+  "pool_n": 2048,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "smoke": false,
+  "strongest_learned_ibc_artifact": {
+    "N": 128,
+    "compute_latency_proxy": 128.0,
+    "contact_feasibility_penalty": 0.8631574190129443,
+    "deployment_gate": "collect_pilot_labels",
+    "energy_evaluations": 128,
+    "energy_utility_rank_correlation": -0.12352863757250013,
+    "exact_expected_utility": -1.2702758569239578,
+    "exact_law_abs_error": 0.0064551962418530895,
+    "high_n_regret": 2.945273142829212,
+    "invalid_action_rate": 0.987162506780109,
+    "jerk_smoothness_penalty": 0.0004277931874568422,
+    "learned_model": "numpy_ibc_linear_feature_ebm",
+    "low_energy_tail_invalid_rate": 0.921875,
+    "low_energy_tail_real_utility": -1.1764370578577295,
+    "marginal_utility_per_added_candidate": -0.0006487190209863783,
+    "mc_ci_high": -1.2335212069964867,
+    "mc_ci_low": -1.2941201143677228,
+    "mc_mean_utility": -1.2638206606821047,
+    "model": "raw_ebm",
+    "oracle_minus_energy_gap": 2.945273142829212,
+    "seed": 1,
+    "selected_energy": -22.83491139205675,
+    "selected_real_utility": -1.2702758569239578,
+    "selected_score": 22.83491139205675,
+    "success_rate": 0.006502951618552631,
+    "tail_rank_correlation": -0.04271978021978022,
+    "task": "multimodal"
+  }
+}

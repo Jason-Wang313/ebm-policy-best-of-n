@@ -1,0 +1,23 @@
+{
+  "artifacts": {
+    "summary_json": "results\\exact_law\\summary.json",
+    "validation_csv": "results\\exact_law\\validation.csv"
+  },
+  "experiment": "exact_law_validation",
+  "n_values": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128
+  ],
+  "prediction_error": {
+    "max_abs_error": 0.013725862793312171,
+    "mean_abs_error": 0.004602369863614973,
+    "rmse": 0.00644385638768255
+  },
+  "smoke": false
+}

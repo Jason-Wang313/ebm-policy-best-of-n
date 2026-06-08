@@ -1,0 +1,29 @@
+{
+  "artifacts": {
+    "seed_level_csv": "results\\repair\\seed_level.csv",
+    "summary_csv": "results\\repair\\summary.csv",
+    "summary_json": "results\\repair\\summary.json"
+  },
+  "calibrated_high_N_gate": "stop_early",
+  "calibrated_high_N_utility_gain_over_raw": 3.353138689755627,
+  "experiment": "repair_and_gates",
+  "n_values": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128
+  ],
+  "raw_high_N_gate": "collect_pilot_labels",
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "smoke": false,
+  "support_penalized_high_N_utility_gain_over_raw": 3.1287754284023883,
+  "value_shaped_high_N_utility_gain_over_raw": 3.1056102380049584
+}

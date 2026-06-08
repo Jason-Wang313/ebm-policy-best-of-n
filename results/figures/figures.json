@@ -1,0 +1,15 @@
+{
+  "figures": [
+    "results\\figures\\figure1_low_energy_tail_energy.png",
+    "results\\figures\\figure1_low_energy_tail_utility.png",
+    "results\\figures\\figure2_repair_comparison.png",
+    "results\\figures\\figure3_tail_diagnostics.png",
+    "results\\figures\\figure4_compute_utility_frontier.png",
+    "results\\figures\\figure5_exact_law_validation.png",
+    "results\\figures\\figure6_distinction_table.png",
+    "results\\figures\\figure7_torch_ibc_repair.png",
+    "results\\figures\\figure8_metaworld_benchmark.png",
+    "results\\figures\\figure10_metaworld_compute_frontier.png",
+    "results\\figures\\figure9_repair_ablations.png"
+  ]
+}

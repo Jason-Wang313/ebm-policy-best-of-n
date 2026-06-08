@@ -1,0 +1,50 @@
+{
+  "artifacts": {
+    "seed_level_csv": "results\\ablations\\seed_level.csv",
+    "summary_csv": "results\\ablations\\summary.csv",
+    "summary_json": "results\\ablations\\summary.json"
+  },
+  "best_pilot_label_result": {
+    "N": 128,
+    "ablation": "pilot_labels",
+    "deployment_gate": "allow_high_n",
+    "num_seeds": 3,
+    "selected_real_utility": 2.031841498759051,
+    "selected_real_utility_ci_high": 2.0421400090565607,
+    "selected_real_utility_ci_low": 2.0215429884615412,
+    "utility_gain_over_raw": 3.3842779724619496,
+    "value": 512
+  },
+  "best_support_weight_result": {
+    "N": 128,
+    "ablation": "support_weight",
+    "deployment_gate": "block_high_n",
+    "num_seeds": 3,
+    "selected_real_utility": 1.7793475538384904,
+    "selected_real_utility_ci_high": 1.7906728750627927,
+    "selected_real_utility_ci_low": 1.7680222326141881,
+    "utility_gain_over_raw": 3.131784027541389,
+    "value": 4.0
+  },
+  "experiment": "calibration_ablation",
+  "n_values": [
+    128
+  ],
+  "pilot_sizes": [
+    16,
+    32,
+    64,
+    128,
+    256,
+    512
+  ],
+  "smoke": false,
+  "support_weights": [
+    0.0,
+    0.25,
+    0.5,
+    1.0,
+    2.0,
+    4.0
+  ]
+}

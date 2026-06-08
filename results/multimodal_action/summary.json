@@ -1,0 +1,29 @@
+{
+  "artifacts": {
+    "baselines_csv": "results\\multimodal_action\\baselines.csv",
+    "seed_level_csv": "results\\multimodal_action\\seed_level.csv",
+    "summary_csv": "results\\multimodal_action\\summary.csv",
+    "summary_json": "results\\multimodal_action\\summary.json"
+  },
+  "experiment": "multimodal_action_energy",
+  "interpretation": "The tail-aligned EBM preserves two action modes better than explicit MSE, while raw shortcut energy fails under high-N low-energy selection.",
+  "mse_regression_mean_utility": -1.531914150099748,
+  "n_values": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128
+  ],
+  "raw_shortcut_ebm_high_N_utility": -1.5015643472098805,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "smoke": false,
+  "tail_aligned_ebm_high_N_utility": 1.6350982217677608
+}

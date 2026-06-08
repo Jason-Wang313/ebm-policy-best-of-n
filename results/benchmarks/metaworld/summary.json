@@ -1,0 +1,230 @@
+{
+  "artifacts": {
+    "seed_level_csv": "results\\benchmarks\\metaworld\\seed_level.csv",
+    "summary_csv": "results\\benchmarks\\metaworld\\summary.csv",
+    "summary_json": "results\\benchmarks\\metaworld\\summary.json"
+  },
+  "benchmark": "metaworld",
+  "error": "",
+  "experiment": "metaworld_benchmark",
+  "metadata": [
+    {
+      "eval": {
+        "action_high": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "action_low": [
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0
+        ],
+        "candidates_per_state": 128,
+        "collection_runtime_seconds": 6.165637000000061,
+        "max_reward": 1.8949175033541343,
+        "mean_reward": 1.4899339334772765,
+        "model_metadata": {
+          "feature_mode": "raw",
+          "final_train_loss": 3.3279784520467124,
+          "hidden_dim": 128,
+          "initial_train_loss": 3.4963353474934897,
+          "loss_decrease": 0.16835689544677734,
+          "model_type": "PyTorch MLP EBM",
+          "num_features": 43,
+          "training_objective": "InfoNCE-style contrastive classification over one expert/high-value action and K negatives"
+        },
+        "num_candidates": 1024,
+        "num_states": 8,
+        "seed": 0,
+        "task": "reach-v3"
+      },
+      "seed": 0,
+      "train": {
+        "action_high": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "action_low": [
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0
+        ],
+        "candidates_per_state": 96,
+        "collection_runtime_seconds": 5.693927600001189,
+        "max_reward": 1.7134302413691547,
+        "mean_reward": 1.5281617799247271,
+        "num_candidates": 768,
+        "num_states": 8,
+        "seed": 0,
+        "task": "reach-v3"
+      }
+    },
+    {
+      "eval": {
+        "action_high": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "action_low": [
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0
+        ],
+        "candidates_per_state": 128,
+        "collection_runtime_seconds": 4.508713300001546,
+        "max_reward": 1.8134173645065559,
+        "mean_reward": 1.474703407118811,
+        "model_metadata": {
+          "feature_mode": "raw",
+          "final_train_loss": 3.423501888910929,
+          "hidden_dim": 128,
+          "initial_train_loss": 3.482886552810669,
+          "loss_decrease": 0.05938466389973973,
+          "model_type": "PyTorch MLP EBM",
+          "num_features": 43,
+          "training_objective": "InfoNCE-style contrastive classification over one expert/high-value action and K negatives"
+        },
+        "num_candidates": 1024,
+        "num_states": 8,
+        "seed": 1,
+        "task": "reach-v3"
+      },
+      "seed": 1,
+      "train": {
+        "action_high": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "action_low": [
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0
+        ],
+        "candidates_per_state": 96,
+        "collection_runtime_seconds": 4.914286700000957,
+        "max_reward": 1.8101064537292273,
+        "mean_reward": 1.4382907413257786,
+        "num_candidates": 768,
+        "num_states": 8,
+        "seed": 1,
+        "task": "reach-v3"
+      }
+    },
+    {
+      "eval": {
+        "action_high": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "action_low": [
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0
+        ],
+        "candidates_per_state": 128,
+        "collection_runtime_seconds": 6.151451499999894,
+        "max_reward": 1.8602360088562393,
+        "mean_reward": 1.474715087760116,
+        "model_metadata": {
+          "feature_mode": "raw",
+          "final_train_loss": 3.402103821436564,
+          "hidden_dim": 128,
+          "initial_train_loss": 3.4875386555989585,
+          "loss_decrease": 0.0854348341623945,
+          "model_type": "PyTorch MLP EBM",
+          "num_features": 43,
+          "training_objective": "InfoNCE-style contrastive classification over one expert/high-value action and K negatives"
+        },
+        "num_candidates": 1024,
+        "num_states": 8,
+        "seed": 2,
+        "task": "reach-v3"
+      },
+      "seed": 2,
+      "train": {
+        "action_high": [
+          1.0,
+          1.0,
+          1.0,
+          1.0
+        ],
+        "action_low": [
+          -1.0,
+          -1.0,
+          -1.0,
+          -1.0
+        ],
+        "candidates_per_state": 96,
+        "collection_runtime_seconds": 4.786149400000795,
+        "max_reward": 1.8499557496468073,
+        "mean_reward": 1.490165957237218,
+        "num_candidates": 768,
+        "num_states": 8,
+        "seed": 2,
+        "task": "reach-v3"
+      }
+    }
+  ],
+  "n_values": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "smoke": false,
+  "status": "SUPPORTED",
+  "strongest_benchmark_artifact": {
+    "N": 128,
+    "benchmark": "metaworld",
+    "compute_latency_proxy": 128.0,
+    "contact_feasibility_penalty": 1.0,
+    "deployment_gate": "collect_pilot_labels",
+    "energy_evaluations": 128,
+    "energy_utility_rank_correlation": 0.06923949243616337,
+    "exact_expected_utility": 1.268144691849204,
+    "exact_law_abs_error": 0.001976307483476658,
+    "high_n_regret": 0.6137783117581963,
+    "invalid_action_rate": 0.9762788258385241,
+    "jerk_smoothness_penalty": 1.7222918441959574,
+    "low_energy_tail_invalid_rate": 0.671875,
+    "low_energy_tail_real_utility": 1.3301599826772654,
+    "marginal_utility_per_added_candidate": -0.00025058352421977736,
+    "mc_ci_high": 1.268836206708426,
+    "mc_ci_low": 1.2635005620230289,
+    "mc_mean_utility": 1.2661683843657274,
+    "model": "metaworld_raw_torch_ebm",
+    "oracle_minus_energy_gap": 0.6137783117581963,
+    "seed": 0,
+    "selected_energy": -3.4495467457390183,
+    "selected_real_utility": 1.268144691849204,
+    "selected_score": 3.4495467457390183,
+    "success_rate": 0.0,
+    "tail_rank_correlation": -0.556959706959707,
+    "task": "reach-v3"
+  },
+  "task": "reach-v3"
+}
