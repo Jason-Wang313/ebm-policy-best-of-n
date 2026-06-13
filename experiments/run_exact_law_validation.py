@@ -6,10 +6,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from ebm_best_of_n.diagnostics import exact_law_validation_table
-from ebm_best_of_n.energy_models import raw_miscalibrated_energy
-from ebm_best_of_n.toy_envs import generate_contact_push_pool
-from ebm_best_of_n.utils import N_VALUES, write_csv, write_json
+from ebm_tail_audit.diagnostics import exact_law_validation_table
+from ebm_tail_audit.energy_models import raw_miscalibrated_energy
+from ebm_tail_audit.toy_envs import generate_contact_push_pool
+from ebm_tail_audit.utils import N_VALUES, write_csv, write_json
 
 
 def run(smoke: bool = False) -> dict[str, object]:

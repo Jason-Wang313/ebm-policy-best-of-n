@@ -5,34 +5,39 @@
     "summary_json": "results\\ablations\\summary.json"
   },
   "best_pilot_label_result": {
-    "N": 128,
+    "N": 512,
     "ablation": "pilot_labels",
     "deployment_gate": "allow_high_n",
-    "num_seeds": 3,
-    "selected_real_utility": 2.031841498759051,
-    "selected_real_utility_ci_high": 2.0421400090565607,
-    "selected_real_utility_ci_low": 2.0215429884615412,
-    "utility_gain_over_raw": 3.3842779724619496,
-    "value": 512
+    "mean_repair_recovery_ratio": 0.9697384199461089,
+    "num_repair_failures": 3,
+    "num_seeds": 5,
+    "selected_real_utility": 2.0168771377287387,
+    "selected_real_utility_ci_high": 2.045555062099684,
+    "selected_real_utility_ci_low": 1.9881992133577933,
+    "utility_gain_over_raw": 3.3776317701765364,
+    "value": 512,
+    "worst_case_recovery_ratio": 0.9601864589984734
   },
   "best_support_weight_result": {
-    "N": 128,
+    "N": 512,
     "ablation": "support_weight",
     "deployment_gate": "block_high_n",
-    "num_seeds": 3,
-    "selected_real_utility": 1.7793475538384904,
-    "selected_real_utility_ci_high": 1.7906728750627927,
-    "selected_real_utility_ci_low": 1.7680222326141881,
-    "utility_gain_over_raw": 3.131784027541389,
-    "value": 4.0
+    "mean_repair_recovery_ratio": 0.8810127913690747,
+    "num_repair_failures": 5,
+    "num_seeds": 5,
+    "selected_real_utility": 1.7082899906842026,
+    "selected_real_utility_ci_high": 1.771572141785312,
+    "selected_real_utility_ci_low": 1.6450078395830932,
+    "utility_gain_over_raw": 3.069044623132001,
+    "value": 4.0,
+    "worst_case_recovery_ratio": 0.8460058053367663
   },
   "experiment": "calibration_ablation",
   "n_values": [
-    128
+    512
   ],
   "pilot_sizes": [
     16,
-    32,
     64,
     128,
     256,
@@ -41,7 +46,6 @@
   "smoke": false,
   "support_weights": [
     0.0,
-    0.25,
     0.5,
     1.0,
     2.0,

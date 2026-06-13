@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from ebm_best_of_n.best_of_n import score_from_energy
+from ebm_tail_audit.tail_selection import score_from_energy
 
 
 def test_low_energy_selection_equals_max_score_selection():

@@ -10,11 +10,11 @@
     "latency_proxy": 1.0,
     "policy": "sample_only",
     "refinement_steps": 0,
-    "seed": 0,
-    "selected_energy": -1.7201609725372444,
-    "selected_real_utility": 0.681327709641059,
+    "seed": 2,
+    "selected_energy": -1.6974638174075227,
+    "selected_real_utility": 0.6874899605226137,
     "stop_rule": "continue",
-    "utility_per_energy_eval": 0.681327709641059
+    "utility_per_energy_eval": 0.6874899605226137
   },
   "experiment": "action_optimization_budget",
   "n_values": [
@@ -25,12 +25,16 @@
     16,
     32,
     64,
-    128
+    128,
+    256,
+    512
   ],
   "seeds": [
     0,
     1,
-    2
+    2,
+    3,
+    4
   ],
   "smoke": false
 }

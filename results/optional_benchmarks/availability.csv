@@ -1,0 +1,6 @@
+benchmark,available,status,claim_boundary
+gymnasium,True,AVAILABLE_FOR_OPTIONAL_ROLLOUT,Optional adapters are guarded and do not support real-robot claims.
+d4rl,False,UNSUPPORTED_FUTURE,Optional adapters are guarded and do not support real-robot claims.
+metaworld,True,CORE_GUARDED_ARTIFACT_SEE_RESULTS_BENCHMARKS_METAWORLD,Optional adapters are guarded and do not support real-robot claims.
+mani_skill,True,AVAILABLE_FOR_OPTIONAL_ROLLOUT,Optional adapters are guarded and do not support real-robot claims.
+robosuite,True,AVAILABLE_FOR_OPTIONAL_ROLLOUT,Optional adapters are guarded and do not support real-robot claims.

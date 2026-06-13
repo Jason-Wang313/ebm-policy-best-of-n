@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import numpy as np
 
-from ebm_best_of_n.energy_models import raw_miscalibrated_energy
-from ebm_best_of_n.toy_envs import generate_multimodal_pool
+from ebm_tail_audit.energy_models import raw_miscalibrated_energy
+from ebm_tail_audit.toy_envs import generate_multimodal_pool
 
 
 def test_seeded_pool_and_energy_are_reproducible():

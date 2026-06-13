@@ -13,7 +13,7 @@ task utility.
 
 When the energy tail is miscalibrated, selected energy can improve with `N`
 while real utility saturates or drops. The experiments here diagnose that
-failure with exact finite Best-of-N laws, low-energy tail metrics, learned
+failure with exact finite tail selection laws, low-energy tail metrics, learned
 IBC-style toy EBMs, repair methods, and compute-utility frontiers.
 
 ## Why EBM Policies
@@ -45,19 +45,49 @@ bash scripts/run_claim_audit.sh
 pytest
 ```
 
-The full run is CPU-only and now includes a PyTorch neural IBC-style EBM plus a
-guarded Meta-World reach-v3 benchmark artifact when the local simulator stack is
-available. External robotics suites remain guarded and do not support claims
-unless they produce artifacts.
+The full run is CPU-only and includes learned NumPy/PyTorch IBC-style EBMs plus
+a guarded Meta-World benchmark ladder over `reach-v3`, `push-v3`,
+`pick-place-v3`, and `button-press-v3`, when the local simulator stack is
+available. Benchmark EBMs use scripted expert actions as the primary positives;
+high-reward sampled actions are reported only as an ablation. Benchmark utility
+is measured as average reward after executing the selected action and then
+letting the scripted policy continue for a short horizon, with success reported
+separately. A separate CPU closed-loop dependency audit executes policies
+without scripted continuation across gated, ungated, expert-centered,
+learned-demo-proposal, behavior-cloned-proposal, state-heuristic, local,
+random, and scripted variants.
+It reports fallback, proposal-prior, and expert-centering dependence
+explicitly. In the current full artifacts, the state-heuristic no-gate variants
+clear the low-dependency threshold, while nearest-demo, behavior-cloned, and
+local Gaussian learned variants do not clear the learned-policy threshold; this
+supports a state-heuristic proposal audit, not real-robot or broad manipulation
+success.
+External robotics suites remain guarded and do not support claims unless they
+produce artifacts. Optional Gymnasium/ManiSkill/robosuite rollouts are
+adapter-execution evidence only, with reward and success reported honestly; the
+current artifacts include nonzero scripted robosuite Lift success.
+
+Repair effectiveness is reported with a metric-bound definition:
+`repair_recovery_ratio = (repair_utility - raw_utility) /
+(oracle_utility - raw_utility)`. The near-complete repair claim is supported
+only when the main supported repair stack reaches at least 95% mean recovery,
+keeps worst-case supported-stress recovery above the audit threshold, and does
+not degrade utility in the generated local artifacts.
 
 ## Key Artifacts
 
 - Controlled tail failure: `results/controlled_energy_tail/summary.csv`
 - Learned IBC-style EBM: `results/learned_ibc/summary.json`
 - PyTorch neural IBC-style EBM: `results/learned_torch_ibc/summary.json`
-- Meta-World benchmark: `results/benchmarks/metaworld/summary.json`
+- Meta-World benchmark ladder: `results/benchmarks/metaworld/task_table.csv`
+- Meta-World closed-loop dependency audit:
+  `results/benchmarks/metaworld/closed_loop_ablation_summary.csv`
+- Optional non-Meta-World rollouts:
+  `results/optional_benchmarks/summary.csv`
+- Energy reliability buckets: `results/reliability/summary.csv`
 - Repair ablations: `results/ablations/summary.json`
 - Repair and gates: `results/repair/summary.json`
+- Repair effectiveness: `results/repair_effectiveness/summary.json`
 - Compute frontier: `results/optimization_budget/summary.csv`
 - Exact law validation: `results/exact_law/validation.csv`
 - Claim audit: `results/claims_status.md`
@@ -65,28 +95,34 @@ unless they produce artifacts.
 
 ## Key Figures
 
-After `bash scripts/run_all.sh`, figures are regenerated from CSV/JSON only:
+After `bash scripts/run_all.sh`, submission figures are regenerated from
+CSV/JSON only:
 
-- `results/figures/figure1_low_energy_tail_energy.png`
-- `results/figures/figure1_low_energy_tail_utility.png`
+- `results/figures/figure1_energy_utility_drop.png`
 - `results/figures/figure2_repair_comparison.png`
-- `results/figures/figure3_tail_diagnostics.png`
-- `results/figures/figure4_compute_utility_frontier.png`
-- `results/figures/figure5_exact_law_validation.png`
-- `results/figures/figure6_distinction_table.png`
-- `results/figures/figure7_torch_ibc_repair.png`
-- `results/figures/figure8_metaworld_benchmark.png`
-- `results/figures/figure9_repair_ablations.png`
-- `results/figures/figure10_metaworld_compute_frontier.png`
+- `results/figures/figure3_tail_reliability.png`
+- `results/figures/figure4_tail_rank_and_tail_utility.png`
+- `results/figures/figure5_compute_utility_frontier.png`
+- `results/figures/figure6_multitask_benchmark_table.png`
+- `results/figures/figure7_repair_ablations.png`
+- `results/figures/figure8_repair_recovery_ratio.png`
+- `results/figures/figure9_attack_surface_audit.png`
+- `results/figures/figure10_closed_loop_dependency_audit.png`
 
 ## Claim Boundaries
 
 Supported claims are local to fixed generator/scorer/energy stacks. Evidence is
 split into controlled toy artifacts, learned NumPy/PyTorch IBC-style EBM
-artifacts, and guarded Meta-World reach-v3 benchmark artifacts. The repository
-does not claim real-robot validation, robot manipulation solved, or a universal
-EBM training recipe. Calibration and support penalties are repairs demonstrated
-in generated artifacts, not a general guarantee.
+artifacts, selected-tail reliability diagrams, guarded multi-task Meta-World
+artifacts, and optional finite simulator-adapter rollouts. The repository does
+not claim real-robot validation, robot manipulation solved, fully autonomous
+Meta-World learned-policy success, or a universal EBM training recipe unless
+the generated dependency audit satisfies its strict threshold.
+Calibration and support penalties are repairs demonstrated in generated
+artifacts, not a general guarantee. The strongest repair wording is limited to
+recovery of the measured oracle-minus-raw gap in local controlled and simulator
+artifacts. Optional non-Meta-World rollouts support finite adapter execution;
+scripted success is claimed only for task rows that report nonzero success.
 
 For the current evidence ledger, inspect `docs/claims.md` or
 `results/claims_status.json`.

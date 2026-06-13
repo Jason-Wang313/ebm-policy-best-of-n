@@ -6,16 +6,16 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from ebm_best_of_n.best_of_n import score_from_energy, utility_best_of_n_finite
-from ebm_best_of_n.energy_models import raw_miscalibrated_energy
-from ebm_best_of_n.samplers import cem_like_refinement, gaussian_action_proposals, langevin_like_refinement
-from ebm_best_of_n.utils import N_VALUES, write_csv, write_json
+from ebm_tail_audit.tail_selection import score_from_energy, utility_tail_selection_finite
+from ebm_tail_audit.energy_models import raw_miscalibrated_energy
+from ebm_tail_audit.samplers import cem_like_refinement, gaussian_action_proposals, langevin_like_refinement
+from ebm_tail_audit.utils import N_VALUES, write_csv, write_json
 
 
 def _row(pool, energy, policy: str, seed: int, n: int, steps: int) -> dict[str, object]:
     score = score_from_energy(energy)
-    utility_curve = utility_best_of_n_finite(score, pool["utility"], [n])
-    energy_curve = utility_best_of_n_finite(score, energy, [n])
+    utility_curve = utility_tail_selection_finite(score, pool["utility"], [n])
+    energy_curve = utility_tail_selection_finite(score, energy, [n])
     evaluations = int(n * max(1, steps + 1))
     selected_utility = float(utility_curve[n])
     return {
@@ -34,8 +34,8 @@ def _row(pool, energy, policy: str, seed: int, n: int, steps: int) -> dict[str, 
 
 def run(smoke: bool = False) -> dict[str, object]:
     out_dir = Path("results") / "optimization_budget"
-    seeds = [0] if smoke else [0, 1, 2]
-    pool_n = 1024 if smoke else 2048
+    seeds = [0] if smoke else [0, 1, 2, 3, 4]
+    pool_n = 1024 if smoke else 1536
     n_values = [1, 2, 4, 8, 16, 32, 64] if smoke else N_VALUES
     rows: list[dict[str, object]] = []
     for seed in seeds:

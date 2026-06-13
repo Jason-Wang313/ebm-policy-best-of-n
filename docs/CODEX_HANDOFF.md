@@ -1,114 +1,82 @@
 # Codex Handoff
 
-## Current Goal
-
-Preserve and strengthen the EBM Best-of-N repository so a new thread can resume
-from the worktree and continue improving paper-quality evidence.
-
-## Repo Facts Verified From Files
+## Current State
 
 - Repo path: `C:\Users\wangz\ebm-policy-best-of-n`.
-- Local git repository initialized during the v2 pass; no remote was verified.
-- Package code lives in `src/ebm_best_of_n/`.
-- Experiment entrypoints live in `experiments/`.
-- Shell runners live in `scripts/`.
-- Paper and audit docs live in `paper/` and `docs/`.
-- Results are stored under `results/` as CSV/JSON/PNG artifacts.
-- `README.md` describes the thesis, claim boundaries, quickstart, key
-  artifacts, and figures.
-- `docs/differentiation_from_wam_jepa_diffusion.md` distinguishes this EBM
-  project from WAM, JEPA, and diffusion Best-of-N projects.
-- `docs/final_audit.md` is the authoritative v2 audit.
-- `results/claims_status.json` currently reports 10 SUPPORTED claim categories,
-  1 PARTIAL category, 1 UNSUPPORTED category, and 14/14 not-clone checks passed.
+- Branch: `main`; remote `origin` is configured.
+- Current objective: paper-credible EBM tail selection repository about
+  extreme-tail inference in energy-based robot policies.
+- Primary claim boundary: no real-robot validation and no broad manipulation
+  success claim.
 
-## Files Changed and Why
+## Implemented Upgrade
 
-- Added `src/ebm_best_of_n/torch_models.py`: PyTorch MLP EBM trained with
-  InfoNCE-style contrastive classification.
-- Added `experiments/run_learned_torch_ibc.py`: neural IBC-style EBM artifact.
-- Added `experiments/run_metaworld_benchmark.py`: guarded Meta-World reach-v3
-  benchmark artifact.
-- Added `experiments/run_calibration_ablation.py`: pilot-label and
-  support-weight repair ablations.
-- Updated shell runners to execute the new experiments.
-- Updated `src/ebm_best_of_n/plotting.py` to regenerate Figures 7-10.
-- Updated `scripts/claim_audit.py` to audit PyTorch, Meta-World, and ablation
-  claims.
-- Added tests for PyTorch model behavior and artifact schema categories.
-- Updated `README.md`, `docs/benchmark_plan.md`, `paper/experiments.md`,
-  `paper/limitations.md`, and `docs/final_audit.md`.
-- Added this handoff file for fresh-thread continuity.
+- Added a guarded Meta-World benchmark ladder for `reach-v3`, `push-v3`,
+  `pick-place-v3`, and `button-press-v3`.
+- Benchmark EBMs now use scripted expert actions as primary positives.
+- Benchmark utility is average closed-loop reward after the selected action is
+  followed by scripted continuation; success is reported separately.
+- High-reward sampled actions remain as `high_reward_ablation`, not main
+  evidence.
+- Added a CPU-feasible closed-loop Meta-World dependency audit with gated,
+  ungated, expert-centered, learned-demo-proposal, behavior-cloned-proposal,
+  state-heuristic, local, random, and scripted variants and no scripted
+  continuation.
+- Added optional guarded rollout artifacts for Gymnasium, ManiSkill, and
+  robosuite, including nonzero scripted robosuite Lift success.
+- Added candidate energy reliability buckets under `results/reliability/`.
+- Added submission figures:
+  - `figure1_energy_utility_drop.png`
+  - `figure2_repair_comparison.png`
+  - `figure3_tail_reliability.png`
+  - `figure4_tail_rank_and_tail_utility.png`
+  - `figure5_compute_utility_frontier.png`
+  - `figure6_multitask_benchmark_table.png`
+  - `figure7_repair_ablations.png`
+- Updated `scripts/claim_audit.py` so promoted claims are all supported,
+  real-robot and broad manipulation success remain non-claim boundaries, and
+  state-heuristic low-dependency success is separated from autonomous
+  learned-policy success even after behavior-cloned learned proposal rows are
+  added.
+- Updated README, theory docs, paper docs, claim docs, tests, and final audit.
 
-## Commands/Tests Run
+## Final Command Results
 
-- `bash scripts/run_smoke.sh`: PASS, 212.2 s on final v2 smoke.
-- `bash scripts/run_all.sh`: PASS, 1006.3 s on final v2 full run.
-- `bash scripts/run_claim_audit.sh`: PASS, 6.5 s.
-- `pytest`: PASS, 46.9 s, `19 passed in 32.85 s`.
+- `python experiments/run_metaworld_benchmark.py`: PASS, 1334.1 s for the full
+  twelve-variant, five-seed, four-task Meta-World child cache refresh.
+- `bash scripts/run_smoke.sh`: PASS, 556.7 s.
+- `bash scripts/run_all.sh`: PASS, 574.2 s from the latest recorded full run;
+  the Meta-World stage reused versioned five-seed child artifacts.
+- `bash scripts/run_claim_audit.sh`: PASS, 22.2 s; current ledger has 16
+  SUPPORTED promoted claims, 0 PARTIAL, and 0 UNSUPPORTED promoted claims.
+- `pytest`: PASS, latest recorded suite had `31 passed in 20.04 s`.
 
-## Experiment Artifacts and Results
+## Key Artifact Paths
 
-- Controlled tail failure:
-  - `results/controlled_energy_tail/summary.csv`
-  - Strongest raw miscalibration at `task=multimodal`, `N=128`: selected energy
-    `-2.9748`, selected utility `-1.5131`, invalid rate `1.0`.
-- Learned NumPy IBC failure:
-  - `results/learned_ibc/summary.json`
-  - Raw utility drops from `0.3627` at N=1 to `-1.1628` at N=128.
-- PyTorch neural IBC:
-  - `results/learned_torch_ibc/summary.json`
-  - Loss decreased from `1.6582` to `0.0123`.
-  - Strongest raw torch row: selected utility `1.5847`, exact-law error
-    `0.0043`, invalid rate approximately `0`.
-- Meta-World benchmark:
-  - `results/benchmarks/metaworld/summary.json`
-  - Status `SUPPORTED`.
-  - Task `reach-v3`, 3 seeds, 8 states x 128 actions per seed.
-  - Strongest raw benchmark row: selected reward `1.6220`, exact-law error
-    `0.0005`, high-N regret `0.2990`.
-- Repair and ablations:
-  - `results/repair/summary.json`
-  - `results/ablations/summary.json`
-  - Best pilot-label ablation: 512 labels, high-N utility `2.0318`, gain
-    `3.3843`.
-- Figures:
-  - `results/figures/figure1_low_energy_tail_energy.png`
-  - `results/figures/figure1_low_energy_tail_utility.png`
-  - `results/figures/figure2_repair_comparison.png`
-  - `results/figures/figure3_tail_diagnostics.png`
-  - `results/figures/figure4_compute_utility_frontier.png`
-  - `results/figures/figure5_exact_law_validation.png`
-  - `results/figures/figure6_distinction_table.png`
-  - `results/figures/figure7_torch_ibc_repair.png`
-  - `results/figures/figure8_metaworld_benchmark.png`
-  - `results/figures/figure9_repair_ablations.png`
-  - `results/figures/figure10_metaworld_compute_frontier.png`
+- Benchmark table: `results/benchmarks/metaworld/task_table.csv`
+- Closed-loop Meta-World dependency audit:
+  `results/benchmarks/metaworld/closed_loop_ablation_summary.csv`
+- Reliability buckets: `results/reliability/summary.csv`
+- Reliability figure: `results/figures/figure3_tail_reliability.png`
+- Claim ledger: `results/claims_status.json`
+- Optional non-Meta-World rollouts:
+  `results/optional_benchmarks/summary.csv`
+- Final audit: `docs/final_audit.md`
 
-## Known Failures or Bugs
+## Weakest Remaining Claim
 
-- No real-robot validation exists.
-- Meta-World benchmark coverage is currently only `reach-v3`.
-- ManiSkill and robosuite import locally but do not yet have supported rollout
-  artifacts in this repo.
-- Meta-World one-step `reach-v3` success is zero in the current artifact; the
-  supported benchmark claim is reward/diagnostic based, not success based.
-- PyTorch and simulator imports are slow on this machine.
+Real-robot validation and broad manipulation success remain
+UNSUPPORTED_NON_CLAIM boundaries. State-heuristic no-gate Meta-World variants
+now clear the low-dependency threshold, but autonomous learned-policy success
+remains unsupported because nearest-demo, behavior-cloned, and local learned
+variants do not clear their learned threshold across all tasks. Optional
+non-Meta-World adapter claims are supported only for finite guarded rollouts;
+scripted success is currently nonzero for robosuite Lift and does not support
+broad manipulation success.
 
-## Open Questions
+## Exact Next Patch
 
-- UNKNOWN whether a remote repository should be configured.
-- UNKNOWN whether the user wants a committed local git history or remote PR.
-- UNKNOWN whether Meta-World `push-v3`, ManiSkill, or robosuite should be the
-  next benchmark priority.
-
-## Next Recommended Steps
-
-1. Add a contact-rich Meta-World task such as `push-v3`.
-2. Add finite rollout artifacts for ManiSkill or robosuite if stable.
-3. Add a multi-task benchmark table.
-4. Add bibliography and turn the paper skeleton into a draft.
-5. Add real-robot or high-fidelity policy evidence before any real-deployment
-   claim.
-
-Safe to clear after handoff is updated.
+Train or distill a learned proposal that clears the per-task learned threshold
+on push, pick-place, reach, and button-press without a runtime scripted expert
+or runtime state heuristic, then rerun the dependency audit before making any
+autonomous learned-policy claim.

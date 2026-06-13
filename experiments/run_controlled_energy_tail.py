@@ -6,24 +6,27 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from ebm_best_of_n.diagnostics import aggregate_curve_rows, curve_rows_for_energy
-from ebm_best_of_n.energy_models import (
+from ebm_tail_audit.diagnostics import aggregate_curve_rows, curve_rows_for_energy
+from ebm_tail_audit.energy_models import (
     good_tail_aligned_energy,
+    noisy_energy,
     ood_low_energy,
     oracle_energy,
+    pilot_label_noise_energy,
     raw_miscalibrated_energy,
     shortcut_energy,
     smoothness_blind_energy,
+    support_blind_energy,
 )
-from ebm_best_of_n.toy_envs import TASKS
-from ebm_best_of_n.utils import N_VALUES, write_csv, write_json
+from ebm_tail_audit.toy_envs import TASKS
+from ebm_tail_audit.utils import N_VALUES, write_csv, write_json
 
 
 def run(smoke: bool = False) -> dict[str, object]:
     out_dir = Path("results") / "controlled_energy_tail"
-    seeds = [0] if smoke else [0, 1, 2]
-    pool_n = 1024 if smoke else 2048
-    mc_trials = 300 if smoke else 700
+    seeds = [0] if smoke else [0, 1, 2, 3, 4]
+    pool_n = 1024 if smoke else 1024
+    mc_trials = 300 if smoke else 100
     seed_rows: list[dict[str, object]] = []
     model_summaries: list[dict[str, object]] = []
     models = [
@@ -33,6 +36,9 @@ def run(smoke: bool = False) -> dict[str, object]:
         ("shortcut", shortcut_energy),
         ("smoothness_blind", smoothness_blind_energy),
         ("ood_low_energy", ood_low_energy),
+        ("support_blind", support_blind_energy),
+        ("noisy_energy", noisy_energy),
+        ("pilot_label_noise", pilot_label_noise_energy),
     ]
     for task_name in ["contact_push", "multimodal"]:
         for seed in seeds:

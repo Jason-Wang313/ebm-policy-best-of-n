@@ -12,14 +12,28 @@ elif command -v python3 >/dev/null 2>&1; then
 else
   PYTHON="/c/Windows/py.exe -3"
 fi
-$PYTHON experiments/run_controlled_energy_tail.py
-$PYTHON experiments/run_learned_ibc_policy.py
-$PYTHON experiments/run_learned_torch_ibc.py
-$PYTHON experiments/run_multimodal_action_energy.py
-$PYTHON experiments/run_action_optimization_budget.py
-$PYTHON experiments/run_repair_and_gates.py
-$PYTHON experiments/run_calibration_ablation.py
-$PYTHON experiments/run_exact_law_validation.py
-$PYTHON experiments/run_metaworld_benchmark.py
-$PYTHON experiments/run_optional_benchmarks.py
-$PYTHON scripts/run_figures.py
+run_step() {
+  echo "==> $*"
+  "$@" &
+  pid=$!
+  while kill -0 "$pid" 2>/dev/null; do
+    sleep 30
+    if kill -0 "$pid" 2>/dev/null; then
+      echo "... still running: $*"
+    fi
+  done
+  wait "$pid"
+  echo "<== $*"
+}
+run_step $PYTHON experiments/run_controlled_energy_tail.py
+run_step $PYTHON experiments/run_learned_ibc_policy.py
+run_step $PYTHON experiments/run_learned_torch_ibc.py
+run_step $PYTHON experiments/run_multimodal_action_energy.py
+run_step $PYTHON experiments/run_action_optimization_budget.py
+run_step $PYTHON experiments/run_repair_and_gates.py
+run_step $PYTHON experiments/run_calibration_ablation.py
+run_step $PYTHON experiments/run_exact_law_validation.py
+run_step $PYTHON experiments/run_metaworld_benchmark.py
+run_step $PYTHON experiments/run_optional_benchmarks.py
+run_step $PYTHON scripts/run_figures.py
+run_step $PYTHON scripts/claim_audit.py

@@ -1,0 +1,7 @@
+{
+  "artifacts": {
+    "summary_csv": "results\\reliability\\summary.csv"
+  },
+  "experiment": "energy_reliability",
+  "rows": 1600
+}

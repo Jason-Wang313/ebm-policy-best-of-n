@@ -8,10 +8,10 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from ebm_best_of_n.diagnostics import aggregate_curve_rows, curve_rows_for_energy
-from ebm_best_of_n.energy_models import good_tail_aligned_energy, raw_miscalibrated_energy
-from ebm_best_of_n.toy_envs import evaluate_multimodal_actions, generate_demo_dataset, generate_multimodal_pool
-from ebm_best_of_n.utils import N_VALUES, write_csv, write_json
+from ebm_tail_audit.diagnostics import aggregate_curve_rows, curve_rows_for_energy
+from ebm_tail_audit.energy_models import good_tail_aligned_energy, raw_miscalibrated_energy
+from ebm_tail_audit.toy_envs import evaluate_multimodal_actions, generate_demo_dataset, generate_multimodal_pool
+from ebm_tail_audit.utils import N_VALUES, write_csv, write_json
 
 
 def _mse_row(seed: int, n: int) -> dict[str, object]:
@@ -33,9 +33,9 @@ def _mse_row(seed: int, n: int) -> dict[str, object]:
 
 def run(smoke: bool = False) -> dict[str, object]:
     out_dir = Path("results") / "multimodal_action"
-    seeds = [0] if smoke else [0, 1, 2]
-    pool_n = 1024 if smoke else 2048
-    mc_trials = 250 if smoke else 600
+    seeds = [0] if smoke else [0, 1, 2, 3, 4]
+    pool_n = 1024 if smoke else 1536
+    mc_trials = 250 if smoke else 250
     seed_rows: list[dict[str, object]] = []
     baseline_rows: list[dict[str, object]] = []
     for seed in seeds:

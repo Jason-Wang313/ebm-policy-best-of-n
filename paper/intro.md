@@ -16,7 +16,7 @@ must be evaluated by selected-tail real utility, not only by average energy,
 demo likelihood, or global rank correlation.
 
 This repository supports a paper skeleton with four ingredients: an exact
-finite Best-of-N law, EBM-specific tail diagnostics, controlled and learned toy
+finite tail selection law, EBM-specific tail diagnostics, controlled and learned toy
 evidence, and repair plus compute-frontier experiments. The central claim is
-conditional: Best-of-N inference helps when the low-energy tail is aligned with
+conditional: tail selection inference helps when the low-energy tail is aligned with
 real utility and can fail when that tail contains low-energy false positives.

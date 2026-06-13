@@ -1,15 +1,14 @@
 {
   "figures": [
-    "results\\figures\\figure1_low_energy_tail_energy.png",
-    "results\\figures\\figure1_low_energy_tail_utility.png",
+    "results\\figures\\figure1_energy_utility_drop.png",
     "results\\figures\\figure2_repair_comparison.png",
-    "results\\figures\\figure3_tail_diagnostics.png",
-    "results\\figures\\figure4_compute_utility_frontier.png",
-    "results\\figures\\figure5_exact_law_validation.png",
-    "results\\figures\\figure6_distinction_table.png",
-    "results\\figures\\figure7_torch_ibc_repair.png",
-    "results\\figures\\figure8_metaworld_benchmark.png",
-    "results\\figures\\figure10_metaworld_compute_frontier.png",
-    "results\\figures\\figure9_repair_ablations.png"
+    "results\\figures\\figure3_tail_reliability.png",
+    "results\\figures\\figure4_tail_rank_and_tail_utility.png",
+    "results\\figures\\figure5_compute_utility_frontier.png",
+    "results\\figures\\figure6_multitask_benchmark_table.png",
+    "results\\figures\\figure7_repair_ablations.png",
+    "results\\figures\\figure8_repair_recovery_ratio.png",
+    "results\\figures\\figure9_attack_surface_audit.png",
+    "results\\figures\\figure10_closed_loop_dependency_audit.png"
   ]
 }

@@ -1,0 +1,11 @@
+suite,task,seed,policy,horizon,steps,total_reward,mean_reward,success_available,success_rate,success_nonzero,runtime_seconds,task_status,failure,claim_boundary
+gymnasium,Pusher-v5,0,seeded_random,12,12,-19.68871272335769,-1.6407260602798075,False,,False,0.8157240000145976,SUPPORTED,,Optional rollout artifact only; not a real-robot or broad manipulation-success claim.
+gymnasium,Pusher-v5,1,seeded_random,12,12,-17.146208337104152,-1.4288506947586794,False,,False,0.03567079998902045,SUPPORTED,,Optional rollout artifact only; not a real-robot or broad manipulation-success claim.
+mani_skill,PushCube-v1,0,seeded_random,12,12,1.5408777445554733,0.1284064787129561,True,0.0,False,3.86645669999416,SUPPORTED,,Optional rollout artifact only; not a real-robot or broad manipulation-success claim.
+mani_skill,PushCube-v1,1,seeded_random,12,12,1.0538151115179062,0.08781792595982552,True,0.0,False,1.0608987000014167,SUPPORTED,,Optional rollout artifact only; not a real-robot or broad manipulation-success claim.
+mani_skill,PickCube-v1,0,seeded_random,12,12,1.1841727122664452,0.0986810593555371,True,0.0,False,1.122212699992815,SUPPORTED,,Optional rollout artifact only; not a real-robot or broad manipulation-success claim.
+mani_skill,PickCube-v1,1,seeded_random,12,12,0.7907939925789833,0.06589949938158195,True,0.0,False,1.1966827999858651,SUPPORTED,,Optional rollout artifact only; not a real-robot or broad manipulation-success claim.
+robosuite,Lift,0,scripted_lift_state_feedback,120,120,56.033405736438674,0.4669450478036556,True,0.275,True,16.095401300000958,SUPPORTED,,Optional rollout artifact only; not a real-robot or broad manipulation-success claim.
+robosuite,Lift,1,scripted_lift_state_feedback,120,120,55.76866993271199,0.4647389161059332,True,0.275,True,9.276202799985185,SUPPORTED,,Optional rollout artifact only; not a real-robot or broad manipulation-success claim.
+robosuite,Door,0,zero_action,12,12,0.02414108983732531,0.0020117574864437758,True,0.0,False,2.666986700001871,SUPPORTED,,Optional rollout artifact only; not a real-robot or broad manipulation-success claim.
+robosuite,Door,1,zero_action,12,12,0.024632960843915436,0.002052746736992953,True,0.0,False,2.5195399000076577,SUPPORTED,,Optional rollout artifact only; not a real-robot or broad manipulation-success claim.

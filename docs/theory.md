@@ -22,7 +22,7 @@ proposals, or a learned proposal. Real utility `U(o, a)` is measured separately
 from energy. It can be task reward, success, contact feasibility, smoothness,
 safety, or a weighted utility in a toy environment.
 
-The Best-of-N EBM policy is:
+The tail selection EBM policy is:
 
 ```text
 sample a_1, ..., a_N ~ q(a | o)
@@ -31,7 +31,7 @@ equivalently choose argmax_i S(o, a_i)
 evaluate U(o, a_selected)
 ```
 
-## Exact Finite Tie-Aware Best-of-N Law
+## Exact Finite Tie-Aware Tail-Selection Law
 
 For a finite pool of `m` candidate actions with scores `S_i` and real utilities
 `U_i`, sort candidates by score in ascending order. Group tied scores. For a tie
@@ -97,8 +97,34 @@ Important edge cases:
    the deployment-relevant region.
 4. Calibration helps only if it repairs selected-tail ranking, not merely
    average prediction error.
-5. Best-of-N inference trades sampling or optimization compute and latency
+5. tail selection inference trades sampling or optimization compute and latency
    against real utility.
+
+## EBM Tail Propositions
+
+**Proposition 1: high-N inference selects the lower-energy tail.** For a fixed
+candidate generator and energy function, the probability that tail selection selects
+from any low-energy quantile increases with `N`. Equivalently under the score
+convention `S = -E`, larger `N` concentrates selection on higher score ranks.
+
+**Proposition 2: tail selection helps only when low-energy quantiles improve real
+utility.** For a fixed finite pool, increasing `N` improves expected selected
+utility exactly when the additional selection mass placed on lower-energy
+candidates has higher real utility than the mass it replaces. Average
+energy-utility correlation is not sufficient; the relevant object is the
+ordered sequence of energy quantiles.
+
+**Proposition 3: low-energy false positives can improve energy while degrading
+utility.** If the extreme low-energy tail contains invalid, contact-bad, or
+out-of-support actions whose real utility is below the current selected
+expectation, then larger `N` can reduce selected energy and simultaneously
+reduce selected real utility.
+
+**Proposition 4: calibration repairs high-N only if it repairs tail ranking.**
+Calibration that improves average prediction error but leaves false positives
+ranked in the extreme low-energy tail does not fix tail selection deployment. A
+repair helps high-N inference only to the extent that it moves real high-utility
+actions above low-energy false positives in the selected tail.
 
 ## Boundary
 

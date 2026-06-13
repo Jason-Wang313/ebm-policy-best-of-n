@@ -1,0 +1,44 @@
+{
+  "all_passed": true,
+  "autonomous_learned_metaworld_success": false,
+  "autonomous_metaworld_success": true,
+  "checks": [
+    {
+      "check": "near-100 wording is metric-defined",
+      "detail": "Any near-100 repair language must define repair recovery ratio.",
+      "passed": true
+    },
+    {
+      "check": "does not claim solved manipulation",
+      "detail": "No broad manipulation-solved wording is allowed.",
+      "passed": true
+    },
+    {
+      "check": "does not claim real-robot validation",
+      "detail": "Real-robot evidence remains unsupported.",
+      "passed": true
+    },
+    {
+      "check": "does not claim repairs always fix EBMs",
+      "detail": "Repairs are reported as measured artifacts, not guarantees.",
+      "passed": true
+    },
+    {
+      "check": "optional success claim blocked when zero",
+      "detail": "Optional-suite success can be claimed only when generated artifacts report nonzero success.",
+      "passed": true
+    },
+    {
+      "check": "autonomous Meta-World claim blocked without low-dependency success",
+      "detail": "Autonomous Meta-World success requires the ungated non-expert-centered threshold artifact.",
+      "passed": true
+    },
+    {
+      "check": "autonomous learned-policy claim blocked without learned threshold",
+      "detail": "Autonomous learned-policy success requires a learned no-gate non-expert-centered threshold artifact.",
+      "passed": true
+    }
+  ],
+  "experiment": "claim_stress_audit",
+  "optional_success_nonzero": true
+}

@@ -12,14 +12,27 @@ elif command -v python3 >/dev/null 2>&1; then
 else
   PYTHON="/c/Windows/py.exe -3"
 fi
-$PYTHON experiments/run_controlled_energy_tail.py --smoke
-$PYTHON experiments/run_learned_ibc_policy.py --smoke
-$PYTHON experiments/run_learned_torch_ibc.py --smoke
-$PYTHON experiments/run_exact_law_validation.py --smoke
-$PYTHON experiments/run_repair_and_gates.py --smoke
-$PYTHON experiments/run_calibration_ablation.py --smoke
-$PYTHON experiments/run_action_optimization_budget.py --smoke
-$PYTHON experiments/run_multimodal_action_energy.py --smoke
-$PYTHON experiments/run_metaworld_benchmark.py --smoke
-$PYTHON experiments/run_optional_benchmarks.py --smoke
-$PYTHON scripts/run_figures.py
+run_step() {
+  echo "==> $*"
+  "$@" &
+  pid=$!
+  while kill -0 "$pid" 2>/dev/null; do
+    sleep 30
+    if kill -0 "$pid" 2>/dev/null; then
+      echo "... still running: $*"
+    fi
+  done
+  wait "$pid"
+  echo "<== $*"
+}
+run_step $PYTHON experiments/run_controlled_energy_tail.py --smoke
+run_step $PYTHON experiments/run_learned_ibc_policy.py --smoke
+run_step $PYTHON experiments/run_learned_torch_ibc.py --smoke
+run_step $PYTHON experiments/run_exact_law_validation.py --smoke
+run_step $PYTHON experiments/run_repair_and_gates.py --smoke
+run_step $PYTHON experiments/run_calibration_ablation.py --smoke
+run_step $PYTHON experiments/run_action_optimization_budget.py --smoke
+run_step $PYTHON experiments/run_multimodal_action_energy.py --smoke
+run_step $PYTHON experiments/run_metaworld_benchmark.py --smoke
+run_step $PYTHON experiments/run_optional_benchmarks.py --smoke
+run_step $PYTHON scripts/run_figures.py

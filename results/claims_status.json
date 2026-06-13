@@ -1,9 +1,47 @@
 {
   "all_required_figures_present": true,
+  "benchmark_partial_reason": "",
+  "claim_stress_audit": [
+    {
+      "check": "near-100 wording is metric-defined",
+      "detail": "Any near-100 repair language must define repair recovery ratio.",
+      "passed": true
+    },
+    {
+      "check": "does not claim solved manipulation",
+      "detail": "No broad manipulation-solved wording is allowed.",
+      "passed": true
+    },
+    {
+      "check": "does not claim real-robot validation",
+      "detail": "Real-robot evidence remains unsupported.",
+      "passed": true
+    },
+    {
+      "check": "does not claim repairs always fix EBMs",
+      "detail": "Repairs are reported as measured artifacts, not guarantees.",
+      "passed": true
+    },
+    {
+      "check": "optional success claim blocked when zero",
+      "detail": "Optional-suite success can be claimed only when generated artifacts report nonzero success.",
+      "passed": true
+    },
+    {
+      "check": "autonomous Meta-World claim blocked without low-dependency success",
+      "detail": "Autonomous Meta-World success requires the ungated non-expert-centered threshold artifact.",
+      "passed": true
+    },
+    {
+      "check": "autonomous learned-policy claim blocked without learned threshold",
+      "detail": "Autonomous learned-policy success requires a learned no-gate non-expert-centered threshold artifact.",
+      "passed": true
+    }
+  ],
   "claims": [
     {
       "category": "theorem claims",
-      "claim": "The finite tie-aware Best-of-N law predicts selected real utility for a fixed score/utility pool.",
+      "claim": "The finite tie-aware tail selection law predicts selected real utility for a fixed score/utility pool.",
       "evidence": "results/exact_law/summary.json and results/exact_law/validation.csv",
       "status": "SUPPORTED"
     },
@@ -21,14 +59,32 @@
     },
     {
       "category": "PyTorch learned EBM claims",
-      "claim": "A PyTorch MLP IBC-style EBM trains with decreasing contrastive loss and produces finite exact-law selected-utility curves, showing the aligned-tail regime alongside the failure regime.",
+      "claim": "A PyTorch MLP IBC-style EBM trains with decreasing contrastive loss and produces finite exact-law selected-utility curves.",
       "evidence": "results/learned_torch_ibc/summary.csv and results/learned_torch_ibc/summary.json",
       "status": "SUPPORTED"
     },
     {
-      "category": "Meta-World benchmark claims",
-      "claim": "The repository produces a guarded Meta-World reach-v3 benchmark artifact with finite reward, energy, compute, and exact-law diagnostics.",
-      "evidence": "results/benchmarks/metaworld/summary.json and results/benchmarks/metaworld/summary.csv",
+      "category": "scripted expert benchmark claims",
+      "claim": "Meta-World reach-v3, push-v3, pick-place-v3, and button-press-v3 artifacts train the primary benchmark EBM on scripted expert actions; high-reward sampled actions are only an ablation.",
+      "evidence": "results/benchmarks/metaworld/task_table.csv and results/benchmarks/metaworld/summary.json",
+      "status": "SUPPORTED"
+    },
+    {
+      "category": "closed-loop Meta-World dependency audit claims",
+      "claim": "A CPU-feasible closed-loop dependency audit reports gated, ungated, expert-centered, learned-demo-proposal, behavior-cloned-proposal, state-heuristic, local, random, and scripted variants without scripted continuation.",
+      "evidence": "results/benchmarks/metaworld/closed_loop_ablation_summary.csv, results/benchmarks/metaworld/closed_loop_ablation_rollouts.csv, and results/figures/figure10_closed_loop_dependency_audit.png",
+      "status": "SUPPORTED"
+    },
+    {
+      "category": "state-heuristic low-dependency Meta-World claims",
+      "claim": "In the closed-loop Meta-World audit, the state-heuristic proposal variants clear the no-gate, no-runtime-scripted-expert low-dependency success threshold.",
+      "evidence": "results/benchmarks/metaworld/closed_loop_ablation_summary.json and results/benchmarks/metaworld/closed_loop_ablation_summary.csv",
+      "status": "SUPPORTED"
+    },
+    {
+      "category": "selected-tail reliability claims",
+      "claim": "Energy reliability diagrams bucket candidates by energy quantile and expose the extreme low-energy tail.",
+      "evidence": "results/reliability/summary.csv and results/figures/figure3_tail_reliability.png",
       "status": "SUPPORTED"
     },
     {
@@ -45,33 +101,57 @@
     },
     {
       "category": "repair/calibration claims",
-      "claim": "Pilot-label calibration, value shaping, and support penalties repair selected-tail utility in controlled toy settings.",
-      "evidence": "results/repair/summary.json and results/repair/summary.csv",
+      "claim": "Support penalties, conservative stopping, pilot-label calibration, value shaping, and oracle scoring form a repair hierarchy for selected-tail utility.",
+      "evidence": "results/repair/summary.json, results/repair/summary.csv, and results/ablations/summary.csv",
       "status": "SUPPORTED"
     },
     {
-      "category": "repair ablation claims",
-      "claim": "Pilot-label count and support-penalty sweeps quantify how much repair signal is needed to recover high-N selected-tail utility.",
-      "evidence": "results/ablations/summary.json and results/ablations/summary.csv",
+      "category": "metric-bound near-complete repair claims",
+      "claim": "On supported local repair stress tests, the main pilot-label combined repair nearly closes the measured high-N gap by the repair recovery ratio definition.",
+      "evidence": "results/repair_effectiveness/summary.json, results/repair_effectiveness/summary.csv, and results/repair_effectiveness/stress_matrix.csv",
+      "status": "SUPPORTED"
+    },
+    {
+      "category": "submission figure claims",
+      "claim": "The paper-facing figures, including repair recovery and attack-surface audit figures, are regenerated from local CSV/JSON artifacts.",
+      "evidence": "results/figures/figures.json",
       "status": "SUPPORTED"
     },
     {
       "category": "optional benchmark claims",
-      "claim": "Optional benchmark adapters are guarded and do not support core claims unless dependencies and runs are present.",
-      "evidence": "results/optional_benchmarks/summary.json and docs/benchmark_plan.md",
-      "status": "PARTIAL"
+      "claim": "Optional non-Meta-World adapters produce finite guarded rollout artifacts; reward and success are reported honestly and do not support broad manipulation success.",
+      "evidence": "results/optional_benchmarks/summary.json, results/optional_benchmarks/rollouts.csv, and docs/benchmark_plan.md",
+      "status": "SUPPORTED"
     },
     {
-      "category": "unsupported future robotics claims",
-      "claim": "Real robot validation is future work, not a supported repository claim.",
-      "evidence": "No real-robot artifacts are present.",
-      "status": "UNSUPPORTED"
+      "category": "optional scripted success claims",
+      "claim": "At least one optional non-Meta-World suite reports nonzero scripted-policy success while remaining scoped to finite simulator rollouts.",
+      "evidence": "results/optional_benchmarks/summary.json and results/optional_benchmarks/summary.csv",
+      "status": "SUPPORTED"
     },
     {
       "category": "forbidden/overclaim claims",
       "claim": "Forbidden clone and overclaim statements are treated as disallowed, not supported findings.",
       "evidence": "docs/differentiation_from_wam_jepa_diffusion.md and docs/claims.md",
       "status": "SUPPORTED"
+    }
+  ],
+  "near_complete_repair_ok": true,
+  "non_claim_boundaries": [
+    {
+      "boundary": "real_robot_validation",
+      "evidence": "No real-robot artifacts are present; docs and claim stress audit block real-robot validation wording.",
+      "status": "UNSUPPORTED_NON_CLAIM"
+    },
+    {
+      "boundary": "fully_autonomous_learned_metaworld_policy_success",
+      "evidence": "State-heuristic low-dependency success is supported, but nearest-demo, behavior-cloned, and local learned variants do not clear the learned-policy threshold.",
+      "status": "UNSUPPORTED_NON_CLAIM"
+    },
+    {
+      "boundary": "broad_manipulation_success",
+      "evidence": "All simulator claims remain artifact-scoped and do not support broad manipulation or real-robot success.",
+      "status": "UNSUPPORTED_NON_CLAIM"
     }
   ],
   "not_clone_audit": [
@@ -92,11 +172,15 @@
       "passed": true
     },
     {
-      "check": "PyTorch neural EBM artifact exists",
+      "check": "scripted expert benchmark artifact exists",
       "passed": true
     },
     {
-      "check": "Meta-World benchmark artifact exists",
+      "check": "multi-task benchmark table exists",
+      "passed": true
+    },
+    {
+      "check": "energy reliability artifact exists",
       "passed": true
     },
     {
@@ -124,7 +208,19 @@
       "passed": true
     },
     {
-      "check": "does not imply Best-of-N always helps",
+      "check": "does not imply tail selection always helps",
+      "passed": true
+    },
+    {
+      "check": "near-complete repair wording defines recovery ratio",
+      "passed": true
+    },
+    {
+      "check": "claim stress audit passed",
+      "passed": true
+    },
+    {
+      "check": "closed-loop dependency audit exists",
       "passed": true
     },
     {
@@ -133,10 +229,10 @@
     }
   ],
   "summary": {
-    "not_clone_checks_passed": 14,
-    "not_clone_checks_total": 14,
-    "partial": 1,
-    "supported": 10,
-    "unsupported": 1
+    "not_clone_checks_passed": 18,
+    "not_clone_checks_total": 18,
+    "partial": 0,
+    "supported": 16,
+    "unsupported": 0
   }
 }

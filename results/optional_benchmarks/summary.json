@@ -1,14 +1,16 @@
 {
   "artifacts": {
+    "availability_csv": "results\\optional_benchmarks\\availability.csv",
+    "rollouts_csv": "results\\optional_benchmarks\\rollouts.csv",
     "summary_csv": "results\\optional_benchmarks\\summary.csv",
     "summary_json": "results\\optional_benchmarks\\summary.json"
   },
-  "benchmarks": [
+  "availability": [
     {
       "available": true,
       "benchmark": "gymnasium",
       "claim_boundary": "Optional adapters are guarded and do not support real-robot claims.",
-      "status": "AVAILABLE_NOT_RUN_BY_CORE_SCRIPT"
+      "status": "AVAILABLE_FOR_OPTIONAL_ROLLOUT"
     },
     {
       "available": false,
@@ -26,16 +28,90 @@
       "available": true,
       "benchmark": "mani_skill",
       "claim_boundary": "Optional adapters are guarded and do not support real-robot claims.",
-      "status": "AVAILABLE_NOT_RUN_BY_CORE_SCRIPT"
+      "status": "AVAILABLE_FOR_OPTIONAL_ROLLOUT"
     },
     {
       "available": true,
       "benchmark": "robosuite",
       "claim_boundary": "Optional adapters are guarded and do not support real-robot claims.",
-      "status": "AVAILABLE_NOT_RUN_BY_CORE_SCRIPT"
+      "status": "AVAILABLE_FOR_OPTIONAL_ROLLOUT"
     }
   ],
-  "claim": "Meta-World support is audited in results/benchmarks/metaworld; other optional benchmark claims remain unsupported until artifacts exist.",
+  "claim": "Optional non-Meta-World adapters produce finite guarded rollout artifacts only; manipulation success is reported separately and may be zero.",
   "experiment": "optional_benchmarks",
-  "smoke": false
+  "optional_success_nonzero": true,
+  "rollout_summary": [
+    {
+      "claim_boundary": "Finite optional rollout adapter evidence; success is reported separately and may be zero.",
+      "failures": "",
+      "mean_reward_per_step": -1.5347883775192435,
+      "mean_success_rate": "",
+      "mean_total_reward": -18.41746053023092,
+      "num_seeds": 2,
+      "success_available": false,
+      "success_nonzero": false,
+      "suite": "gymnasium",
+      "task": "Pusher-v5",
+      "task_status": "SUPPORTED"
+    },
+    {
+      "claim_boundary": "Finite optional rollout adapter evidence; success is reported separately and may be zero.",
+      "failures": "",
+      "mean_reward_per_step": 0.08229027936855952,
+      "mean_success_rate": 0.0,
+      "mean_total_reward": 0.9874833524227142,
+      "num_seeds": 2,
+      "success_available": true,
+      "success_nonzero": false,
+      "suite": "mani_skill",
+      "task": "PickCube-v1",
+      "task_status": "SUPPORTED"
+    },
+    {
+      "claim_boundary": "Finite optional rollout adapter evidence; success is reported separately and may be zero.",
+      "failures": "",
+      "mean_reward_per_step": 0.10811220233639081,
+      "mean_success_rate": 0.0,
+      "mean_total_reward": 1.2973464280366898,
+      "num_seeds": 2,
+      "success_available": true,
+      "success_nonzero": false,
+      "suite": "mani_skill",
+      "task": "PushCube-v1",
+      "task_status": "SUPPORTED"
+    },
+    {
+      "claim_boundary": "Finite optional rollout adapter evidence; success is reported separately and may be zero.",
+      "failures": "",
+      "mean_reward_per_step": 0.0020322521117183646,
+      "mean_success_rate": 0.0,
+      "mean_total_reward": 0.024387025340620372,
+      "num_seeds": 2,
+      "success_available": true,
+      "success_nonzero": false,
+      "suite": "robosuite",
+      "task": "Door",
+      "task_status": "SUPPORTED"
+    },
+    {
+      "claim_boundary": "Finite optional rollout adapter evidence; success is reported separately and may be zero.",
+      "failures": "",
+      "mean_reward_per_step": 0.4658419819547944,
+      "mean_success_rate": 0.275,
+      "mean_total_reward": 55.901037834575334,
+      "num_seeds": 2,
+      "success_available": true,
+      "success_nonzero": true,
+      "suite": "robosuite",
+      "task": "Lift",
+      "task_status": "SUPPORTED"
+    }
+  ],
+  "smoke": false,
+  "status": "SUPPORTED",
+  "supported_non_metaworld_suites": [
+    "gymnasium",
+    "mani_skill",
+    "robosuite"
+  ]
 }

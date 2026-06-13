@@ -8,11 +8,16 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from ebm_best_of_n.calibration import apply_energy_calibrator, fit_energy_calibrator
-from ebm_best_of_n.diagnostics import aggregate_curve_rows, curve_rows_for_energy
-from ebm_best_of_n.energy_models import NumpyIBCEnergy, oracle_energy, support_penalized_energy, value_shaped_energy
-from ebm_best_of_n.toy_envs import evaluate_multimodal_actions, generate_demo_dataset, generate_multimodal_pool
-from ebm_best_of_n.utils import N_VALUES, write_csv, write_json
+from ebm_tail_audit.calibration import apply_energy_calibrator, fit_energy_calibrator
+from ebm_tail_audit.diagnostics import (
+    aggregate_curve_rows,
+    annotate_repair_effectiveness,
+    curve_rows_for_energy,
+    make_conservative_gated_rows,
+)
+from ebm_tail_audit.energy_models import NumpyIBCEnergy, oracle_energy, support_penalized_energy, value_shaped_energy
+from ebm_tail_audit.toy_envs import evaluate_multimodal_actions, generate_demo_dataset, generate_multimodal_pool
+from ebm_tail_audit.utils import N_VALUES, write_csv, write_json
 
 
 def _mse_baseline(seed: int, n: int = 512) -> dict[str, float | str]:
@@ -50,12 +55,12 @@ def _nearest_neighbor_baseline(seed: int, n: int = 512) -> dict[str, float | str
 
 def run(smoke: bool = False) -> dict[str, object]:
     out_dir = Path("results") / "learned_ibc"
-    seeds = [0] if smoke else [0, 1, 2]
-    demo_n = 256 if smoke else 384
-    pool_n = 1024 if smoke else 2048
-    epochs = 35 if smoke else 70
+    seeds = [0] if smoke else [0, 1, 2, 3, 4]
+    demo_n = 256 if smoke else 320
+    pool_n = 1024 if smoke else 1536
+    epochs = 35 if smoke else 50
     negatives = 12 if smoke else 16
-    mc_trials = 250 if smoke else 650
+    mc_trials = 250 if smoke else 300
     seed_rows: list[dict[str, object]] = []
     baseline_rows: list[dict[str, object]] = []
     metadata: dict[str, object] | None = None
@@ -75,13 +80,17 @@ def run(smoke: bool = False) -> dict[str, object]:
         pool = generate_multimodal_pool(seed + 10, pool_n)
         raw_energy = model.energy(pool["observations"], pool["actions"])
         calibrator = fit_energy_calibrator(pool, raw_energy, pilot_size=160 if smoke else 224, seed=seed)
+        calibrated = apply_energy_calibrator(pool, raw_energy, calibrator)
+        oracle = oracle_energy(pool)
         energies = {
             "raw_ebm": raw_energy,
-            "calibrated": apply_energy_calibrator(pool, raw_energy, calibrator),
+            "calibrated": calibrated,
             "value_shaped": value_shaped_energy(raw_energy, pool),
             "support_penalized": support_penalized_energy(raw_energy, pool, weight=2.0),
+            "calibrated_support_penalized": support_penalized_energy(calibrated, pool, weight=2.0),
+            "oracle_value_shaped_upper": value_shaped_energy(oracle, pool),
             "random": np.zeros_like(raw_energy),
-            "oracle": oracle_energy(pool),
+            "oracle": oracle,
         }
         for model_name, energy in energies.items():
             rows, _summary = curve_rows_for_energy(pool, energy, N_VALUES, model_name, seed, exact_mc_trials=mc_trials)
@@ -92,6 +101,31 @@ def run(smoke: bool = False) -> dict[str, object]:
         baseline_rows.append(_mse_baseline(seed, n=pool_n // 2))
         baseline_rows.append(_nearest_neighbor_baseline(seed, n=pool_n // 2))
 
+    seed_rows.extend(
+        make_conservative_gated_rows(seed_rows, "support_penalized", "support_penalized_conservative_gate")
+    )
+    seed_rows.extend(
+        make_conservative_gated_rows(
+            seed_rows,
+            "calibrated_support_penalized",
+            "calibrated_support_penalized_conservative_gate",
+        )
+    )
+    annotate_repair_effectiveness(
+        seed_rows,
+        "raw_ebm",
+        "oracle",
+        {
+            "calibrated",
+            "value_shaped",
+            "support_penalized",
+            "support_penalized_conservative_gate",
+            "calibrated_support_penalized",
+            "calibrated_support_penalized_conservative_gate",
+            "oracle_value_shaped_upper",
+            "oracle",
+        },
+    )
     summary_rows = aggregate_curve_rows(seed_rows)
     write_csv(out_dir / "seed_level.csv", seed_rows)
     write_csv(out_dir / "summary.csv", summary_rows)
@@ -110,6 +144,7 @@ def run(smoke: bool = False) -> dict[str, object]:
         "seeds": seeds,
         "strongest_learned_ibc_artifact": strongest,
         "calibrated_high_N_utility_gain_over_raw": repair_gain,
+        "main_repair_stack": "calibrated_support_penalized_conservative_gate",
         "baselines": baseline_rows,
         "artifacts": {
             "summary_csv": str(out_dir / "summary.csv"),

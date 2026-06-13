@@ -1,21 +1,21 @@
 # Reviewer Attacks and Honest Responses
 
-1. **This is only a toy.**  
+1. **This is only a toy.**
    Correct. The core evidence is controlled and learned toy evidence. The value
    is isolating a deployment-tail failure mode before claiming robot-scale
    validation.
 
-2. **The theorem is reused from the Best-of-N/WAM paper.**  
+2. **The theorem is reused from the tail selection/WAM paper.**
    The finite selection identity is reused as math. The scientific object here
    is a conditional action energy and its low-energy tail, not imagined rollout
    dynamics.
 
-3. **This is just reward-model misalignment.**  
+3. **This is just reward-model misalignment.**
    It is related, but the operational object is EBM inference: selecting
    minimum-energy actions from candidate sets. The diagnostics target the
    selected low-energy tail.
 
-4. **This is just distribution shift.**  
+4. **This is just distribution shift.**
    Distribution shift is one cause. The paper isolates the selection mechanism:
    larger `N` puts more pressure on the low-energy tail and can amplify hidden
    false positives.
@@ -27,7 +27,7 @@
 
 6. **Low energy was never supposed to equal real utility.**  
    Agreed. The paper does not require equality. It requires that the selected
-   low-energy tail be sufficiently aligned with real utility for Best-of-N to
+   low-energy tail be sufficiently aligned with real utility for tail selection to
    help deployment.
 
 7. **Why not just train a better EBM?**  

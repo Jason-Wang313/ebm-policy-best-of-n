@@ -1,1 +1,1 @@
-"""Experiment entrypoints for EBM Best-of-N artifacts."""
+"""Experiment entrypoints for EBM tail selection artifacts."""

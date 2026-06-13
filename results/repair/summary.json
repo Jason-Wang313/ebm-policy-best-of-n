@@ -1,12 +1,18 @@
 {
   "artifacts": {
+    "repair_effectiveness_stress_matrix_csv": "results/repair_effectiveness/stress_matrix.csv",
+    "repair_effectiveness_summary_csv": "results/repair_effectiveness/summary.csv",
     "seed_level_csv": "results\\repair\\seed_level.csv",
     "summary_csv": "results\\repair\\summary.csv",
     "summary_json": "results\\repair\\summary.json"
   },
   "calibrated_high_N_gate": "stop_early",
-  "calibrated_high_N_utility_gain_over_raw": 3.353138689755627,
+  "calibrated_high_N_utility_gain_over_raw": 3.3815543028245507,
   "experiment": "repair_and_gates",
+  "main_repair_num_failures": 1,
+  "main_repair_recovery_ratio": 0.9719124670943302,
+  "main_repair_stack": "calibrated_support_penalized_conservative_gate",
+  "main_repair_worst_case_recovery_ratio": 0.9624453063383376,
   "n_values": [
     1,
     2,
@@ -15,15 +21,19 @@
     16,
     32,
     64,
-    128
+    128,
+    256,
+    512
   ],
   "raw_high_N_gate": "collect_pilot_labels",
   "seeds": [
     0,
     1,
-    2
+    2,
+    3,
+    4
   ],
   "smoke": false,
-  "support_penalized_high_N_utility_gain_over_raw": 3.1287754284023883,
-  "value_shaped_high_N_utility_gain_over_raw": 3.1056102380049584
+  "support_penalized_high_N_utility_gain_over_raw": 3.0842432677331653,
+  "value_shaped_high_N_utility_gain_over_raw": 3.1465072244920345
 }

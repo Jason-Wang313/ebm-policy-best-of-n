@@ -1,8 +1,8 @@
-# Differentiation from WAM, JEPA, and Diffusion Best-of-N Projects
+# Differentiation from WAM, JEPA, and Diffusion tail selection Projects
 
 ## 1. Reused Theorem
 
-This repository reuses only the finite, tie-aware Best-of-N selection law as a
+This repository reuses only the finite, tie-aware tail-selection law as a
 mathematical selection identity. Given a fixed finite pool of candidate actions
 or trajectories with scores \(S_i\) and measured utilities \(U_i\), the law gives
 the exact expected utility of selecting the maximum-score item after drawing
@@ -75,13 +75,13 @@ latent predictive targets, or diffusion sample diversity as the failure object.
 ## 5. Forbidden Clone Claims
 
 The repository must not make claims that collapse this project into the earlier
-Best-of-N repos. Forbidden claims include:
+tail selection repos. Forbidden claims include:
 
 - "We prove EBMs work."
 - "We solve robot manipulation."
 - "We validate on real robots." unless a real-robot experiment is actually
   implemented and audited.
-- "Best-of-N always helps."
+- "tail selection always helps."
 - "Calibration always fixes energy policies."
 - "Energy is real utility."
 - "Low energy means good action."
@@ -91,7 +91,7 @@ Best-of-N repos. Forbidden claims include:
 - "This is the same as JEPA latent tail hallucination."
 - "This is the same as diffusion diversity-selection tradeoff."
 
-The allowed central claim is narrower: Best-of-N inference for energy-based
+The allowed central claim is narrower: tail selection inference for energy-based
 robot policies helps only when the low-energy selected tail is aligned with
 real utility; otherwise energy can improve while utility saturates or degrades,
 and tail calibration, support awareness, or verification can repair the selected

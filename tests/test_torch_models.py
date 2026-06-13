@@ -10,7 +10,7 @@ torch_available = importlib.util.find_spec("torch") is not None
 
 @pytest.mark.skipif(not torch_available, reason="PyTorch is not installed")
 def test_torch_ibc_energy_trains_and_scores_finite():
-    from ebm_best_of_n.torch_models import TorchIBCEnergy, uniform_box_negatives
+    from ebm_tail_audit.torch_models import TorchIBCEnergy, uniform_box_negatives
 
     rng = np.random.default_rng(0)
     obs = rng.normal(size=(24, 2)).astype(np.float32)

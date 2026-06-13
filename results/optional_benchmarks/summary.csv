@@ -1,6 +1,6 @@
-benchmark,available,status,claim_boundary
-gymnasium,True,AVAILABLE_NOT_RUN_BY_CORE_SCRIPT,Optional adapters are guarded and do not support real-robot claims.
-d4rl,False,UNSUPPORTED_FUTURE,Optional adapters are guarded and do not support real-robot claims.
-metaworld,True,CORE_GUARDED_ARTIFACT_SEE_RESULTS_BENCHMARKS_METAWORLD,Optional adapters are guarded and do not support real-robot claims.
-mani_skill,True,AVAILABLE_NOT_RUN_BY_CORE_SCRIPT,Optional adapters are guarded and do not support real-robot claims.
-robosuite,True,AVAILABLE_NOT_RUN_BY_CORE_SCRIPT,Optional adapters are guarded and do not support real-robot claims.
+suite,task,num_seeds,task_status,mean_total_reward,mean_reward_per_step,success_available,mean_success_rate,success_nonzero,failures,claim_boundary
+gymnasium,Pusher-v5,2,SUPPORTED,-18.41746053023092,-1.5347883775192435,False,,False,,Finite optional rollout adapter evidence; success is reported separately and may be zero.
+mani_skill,PickCube-v1,2,SUPPORTED,0.9874833524227142,0.08229027936855952,True,0.0,False,,Finite optional rollout adapter evidence; success is reported separately and may be zero.
+mani_skill,PushCube-v1,2,SUPPORTED,1.2973464280366898,0.10811220233639081,True,0.0,False,,Finite optional rollout adapter evidence; success is reported separately and may be zero.
+robosuite,Door,2,SUPPORTED,0.024387025340620372,0.0020322521117183646,True,0.0,False,,Finite optional rollout adapter evidence; success is reported separately and may be zero.
+robosuite,Lift,2,SUPPORTED,55.901037834575334,0.4658419819547944,True,0.275,True,,Finite optional rollout adapter evidence; success is reported separately and may be zero.

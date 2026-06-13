@@ -1,0 +1,143 @@
+\section{Appendix}
+
+\subsection{Finite-law derivation}
+
+For completeness, we derive Equation~\ref{eq:finite-law}. Let \(G_k\) be the \(k\)-th score group in descending score order and let \(C_k\) be the cumulative proposal mass of groups \(1,\ldots,k\). The event that group \(k\) is selected is the event that no sample lands in groups \(1,\ldots,k-1\) and at least one sample lands in group \(k\). Its probability is
+\[
+    \Pr(\mathrm{sel}=G_k) =
+    (1-C_{k-1})^N - (1-C_k)^N .
+\]
+Conditional on this event, all selected candidates have score \(s_k\). If tie-breaking is uniform among tied sampled occurrences, the expected utility is the proposal-weighted group mean \(\bar U_k\). Summing over groups gives the exact finite selected-utility law.
+
+\subsection{Artifact map}
+
+\begin{table}[h]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{0.33\linewidth}p{0.58\linewidth}}
+\toprule
+Claim area & Local artifacts \\
+\midrule
+Exact finite law & \texttt{results/exact\_law/summary.json}, \texttt{validation.csv} \\
+Controlled low-energy tail failure & \texttt{results/controlled\_energy\_tail/summary.json}, \texttt{seed\_level.csv} \\
+Learned IBC-style EBMs & \texttt{results/learned\_ibc/summary.json}, \texttt{results/learned\_torch\_ibc/summary.json} \\
+Repair hierarchy & \texttt{results/repair/summary.json}, \texttt{results/repair\_effectiveness/summary.json} \\
+Reliability diagrams & \texttt{results/reliability/summary.csv}, \texttt{figure3\_tail\_reliability.png} \\
+Meta-World benchmark ladder & \texttt{results/benchmarks/metaworld/task\_table.csv} \\
+Closed-loop dependency audit & \texttt{closed\_loop\_ablation\_summary.csv}, \texttt{closed\_loop\_ablation\_policy\_summary.csv} \\
+Optional adapters & \texttt{results/optional\_benchmarks/summary.json}, \texttt{rollouts.csv} \\
+Claim audit & \texttt{results/claims\_status.json}, \texttt{docs/claims.md} \\
+\bottomrule
+\end{tabular}
+\caption{Artifact paths used by the paper. Paths are relative to the repository root.}
+\label{tab:artifact-map}
+\end{table}
+
+\subsection{Claim ledger summary}
+
+\begin{table}[h]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{p{0.27\linewidth}p{0.62\linewidth}}
+\toprule
+Status & Paper claim boundary \\
+\midrule
+Supported & Finite tie-aware law predicts selected utility for a fixed score/utility pool. \\
+Supported & Controlled and learned IBC-style EBMs can over-optimize a miscalibrated low-energy tail. \\
+Supported & Reliability buckets expose the extreme low-energy tail and report utility, success, support, and contact diagnostics. \\
+Supported & The main repair stack nearly closes the measured high-\(N\) gap by the predefined recovery ratio. \\
+Supported & Meta-World selected-action artifacts use scripted expert actions as primary positives and scripted continuation for rollout reward. \\
+Supported & State-heuristic no-gate Meta-World variants clear the low-dependency threshold in the closed-loop audit. \\
+Unsupported non-claim & No real-robot validation is present. \\
+Unsupported non-claim & Autonomous learned-policy Meta-World success remains unsupported. \\
+Unsupported non-claim & Broad manipulation success is not claimed. \\
+\bottomrule
+\end{tabular}
+\caption{Condensed claim ledger. The full ledger is in \texttt{docs/claims.md} and \texttt{results/claims\_status.json}.}
+\label{tab:claim-ledger}
+\end{table}
+
+\subsection{Repair stress details}
+
+\begin{table}[h]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrr}
+\toprule
+Repair model at \(N=512\) & Mean recovery & Worst recovery & Failures & Utility-degrading \\
+\midrule
+support penalized & 0.886 & 0.836 & 5 & 0 \\
+support penalized + gate & 0.870 & 0.735 & 5 & 0 \\
+value shaped & 0.904 & 0.892 & 5 & 0 \\
+calibrated & 0.972 & 0.960 & 1 & 0 \\
+calibrated + support + gate & 0.972 & 0.962 & 1 & 0 \\
+oracle & 1.000 & 1.000 & 0 & 0 \\
+\bottomrule
+\end{tabular}
+\caption{Repair stress matrix summary. Failures count configured diagnostic failures, not hidden utility regressions.}
+\label{tab:repair-stress}
+\end{table}
+
+\subsection{Optional guarded rollout adapters}
+
+\begin{table}[h]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{llrrr}
+\toprule
+Suite & Task & Seeds & Mean reward & Success \\
+\midrule
+Gymnasium & Pusher-v5 & 2 & -18.417 & n/a \\
+ManiSkill & PickCube-v1 & 2 & 0.987 & 0.000 \\
+ManiSkill & PushCube-v1 & 2 & 1.297 & 0.000 \\
+robosuite & Door & 2 & 0.034 & 0.000 \\
+robosuite & Lift & 2 & 55.757 & 0.275 \\
+\bottomrule
+\end{tabular}
+\caption{Optional non-Meta-World adapters. These are finite guarded rollout artifacts only.}
+\label{tab:optional}
+\end{table}
+
+\subsection{Additional figures}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\linewidth]{figure4_tail_rank_and_tail_utility.png}
+    \caption{Tail rank and tail utility diagnostics.}
+    \label{fig:tail-rank-appendix}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\linewidth]{figure6_multitask_benchmark_table.png}
+    \caption{Generated multi-task benchmark table.}
+    \label{fig:benchmark-table-appendix}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\linewidth]{figure7_repair_ablations.png}
+    \caption{Repair ablations.}
+    \label{fig:repair-ablations-appendix}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\linewidth]{figure9_attack_surface_audit.png}
+    \caption{Attack-surface and claim-boundary audit figure.}
+    \label{fig:attack-surface-appendix}
+\end{figure}
+
+\subsection{Reproducibility commands}
+
+The anonymous paper PDF can be rebuilt from the repository root with:
+\begin{center}
+\small
+\texttt{powershell -ExecutionPolicy Bypass -File}\\
+\texttt{scripts/build\_iclr\_paper.ps1}
+\end{center}
+The claim audit can be run with \texttt{bash scripts/run\_claim\_audit.sh}. The test suite can be run with \texttt{pytest}. Long simulator refreshes are intentionally not required for rebuilding the paper because the paper consumes the existing CSV/JSON/PNG artifacts.
