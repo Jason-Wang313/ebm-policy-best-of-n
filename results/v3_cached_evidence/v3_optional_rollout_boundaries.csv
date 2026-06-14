@@ -1,0 +1,6 @@
+suite,task,num_seeds,task_status,mean_total_reward,mean_success_rate,success_nonzero,claim_boundary
+gymnasium,Pusher-v5,2,SUPPORTED,-18.41746053023092,,False,Finite optional rollout adapter evidence; success is reported separately and may be zero.
+mani_skill,PickCube-v1,2,SUPPORTED,0.9874833524227142,0.0,False,Finite optional rollout adapter evidence; success is reported separately and may be zero.
+mani_skill,PushCube-v1,2,SUPPORTED,1.2973464280366898,0.0,False,Finite optional rollout adapter evidence; success is reported separately and may be zero.
+robosuite,Door,2,SUPPORTED,0.024387025340620372,0.0,False,Finite optional rollout adapter evidence; success is reported separately and may be zero.
+robosuite,Lift,2,SUPPORTED,55.901037834575334,0.275,True,Finite optional rollout adapter evidence; success is reported separately and may be zero.

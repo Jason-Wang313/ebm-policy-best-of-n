@@ -11,7 +11,7 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{url}
 
-\graphicspath{{../../results/figures/}}
+\graphicspath{{../../results/figures/}{../../results/figures/v3/}}
 
 \title{Low Energy Is Not Enough:\\Tail Audits for Energy-Based Robot Policies}
 
@@ -22,6 +22,7 @@
 \newcommand{\score}{S_\theta}
 \newcommand{\utility}{U}
 \newcommand{\candidates}{\mathcal{A}}
+\input{v3_results_macros.tex}
 
 % \iclrfinalcopy
 
@@ -208,6 +209,117 @@ scripted expert & 1.00 & 143.14 & 0.000 \\
     \caption{Closed-loop dependency audit. The figure separates expert-centered, learned-proposal, state-heuristic, random, and scripted variants so the supported claim does not overstate autonomy.}
     \label{fig:dependency}
 \end{figure}
+
+\section{V3 Evidence Audit}
+\label{sec:v3-evidence-audit}
+
+The v3 revision promotes an audit layer over the generated artifacts rather
+than changing the scope of the claim. The script
+\texttt{experiments/v3\_cached\_evidence.py} reads the committed CSV/JSON
+outputs, claim ledger, simulator-dependency tables, optional adapter rollouts,
+and figure inventory; writes compact summaries under
+\texttt{results/v3\_cached\_evidence}; creates six additional figures under
+\texttt{results/figures/v3}; and exports the macros used in this section. The
+process is intentionally RAM-light: it aggregates existing CPU artifacts
+instead of rerunning Meta-World or retraining the learned EBMs.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.92\linewidth]{v3_energy_tail_failure_matrix.pdf}
+    \caption{V3 high-\(N\) selected-tail failure matrix. At \(N=512\), the
+    strongest raw miscalibrated row has selected energy
+    \VThreeEBMRawHighNEnergy{}, selected real utility
+    \VThreeEBMRawHighNUtility{}, invalid-action rate
+    \VThreeEBMRawHighNInvalid{}, and tail-rank correlation
+    \VThreeEBMRawTailRankCorr{}.}
+    \label{fig:v3-tail-matrix}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \begin{minipage}{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{v3_repair_recovery_stress.pdf}
+    \end{minipage}
+    \begin{minipage}{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{v3_closed_loop_dependency_audit.pdf}
+    \end{minipage}
+    \caption{V3 repair and dependency audits. The main repair stack reaches
+    mean recovery \VThreeEBMRepairMeanRecovery{} and worst-case recovery
+    \VThreeEBMRepairWorstRecovery{} with
+    \VThreeEBMRepairDegrades{} utility-degrading rows, while the closed-loop
+    dependency audit keeps learned-proposal and state-heuristic outcomes
+    separate.}
+    \label{fig:v3-repair-dependency}
+\end{figure}
+
+The v3 artifact has \VThreeEBMSupportedClaims{} supported promoted claim
+categories, \VThreeEBMPartialClaims{} partial promoted claims, and
+\VThreeEBMUnsupportedClaims{} unsupported promoted claims. It also keeps
+\VThreeEBMNonClaimBoundaries{} unsupported endpoints as explicit non-claim
+boundaries. This distinction is important: a boundary is not a failed paper
+claim; it is a guardrail preventing the manuscript from implying real-robot
+validation, broad manipulation success, or autonomous learned-policy
+Meta-World success that the artifacts do not support.
+
+The main failure evidence is still Figure~\ref{fig:v3-tail-matrix}. It is
+specific to EBMs because the deployed object is not a generated text answer,
+latent prediction, or imagined rollout. The selected object is an action from
+a candidate set, and inference chooses it by minimizing conditional energy
+\(\energy(o,a)\). At high \(N\), the low-energy tail can move out of support:
+the strongest row has support distance \VThreeEBMRawSupportDistance{} and
+high-\(N\) regret \VThreeEBMRawHighNRegret{}. Thus the central claim is not
+``more samples are bad.'' It is that extra candidates are beneficial only when
+the selected low-energy tail remains aligned with measured task utility.
+
+The positive result is also scoped. The main repair stack nearly closes the
+measured oracle-minus-raw gap by Equation~\ref{eq:recovery}, but it still
+reports \VThreeEBMRepairFailures{} diagnostic repair failure. That failure is
+not hidden. It is what keeps the repair claim metric-bound rather than
+universal. The PyTorch EBM provides the contrasting aligned-tail artifact:
+its contrastive loss decreases by \VThreeEBMTorchLossDecrease{} and its raw
+high-\(N\) selected utility is \VThreeEBMTorchRawUtility{}. The paper therefore
+does not claim EBMs inherently fail; it claims the selected tail must be
+audited.
+
+\begin{figure}[t]
+    \centering
+    \begin{minipage}{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{v3_claim_boundary_inventory.pdf}
+    \end{minipage}
+    \begin{minipage}{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{v3_optional_rollout_boundary.pdf}
+    \end{minipage}
+    \caption{V3 claim-boundary and optional-adapter inventories. Optional
+    adapters cover \VThreeEBMOptionalSuites{} non-Meta-World suites and contain
+    \VThreeEBMOptionalNonzero{} nonzero success row, but remain finite
+    guarded rollout evidence only.}
+    \label{fig:v3-boundaries}
+\end{figure}
+
+The simulator ladder is deliberately split. The selected-action Meta-World
+benchmark covers \VThreeEBMMetaworldTasks{} tasks, but the stronger operational
+test is the \VThreeEBMClosedLoopRows{}-row closed-loop dependency audit across
+\VThreeEBMClosedLoopPolicies{} policy variants and
+\VThreeEBMClosedLoopTasks{} tasks. State-heuristic variants reach mean success
+\VThreeEBMStateHeuristicSuccess{}, while learned-demo and behavior-cloned
+proposal variants reach \VThreeEBMLearnedDemoSuccess{} and
+\VThreeEBMLearnedBCSuccess{}. This is why the paper can support a
+state-heuristic low-dependency simulator boundary without claiming autonomous
+learned-policy success.
+
+Finally, v3 makes the artifact surface inspectable. The evidence cache records
+\VThreeEBMArtifactFiles{} audited non-cache files, \VThreeEBMFigureFiles{}
+paper-facing figures, \VThreeEBMVThreeFigures{} v3 figures,
+\VThreeEBMReliabilityRows{} reliability rows, and
+\VThreeEBMOptimizationRows{} compute-frontier rows. The exact-law validation
+has max absolute error \VThreeEBMExactMaxError{}. These numbers matter because
+the paper is submission-ready only if a fresh reviewer or fresh agent can
+locate the evidence, rebuild the figures, and verify that every promoted claim
+has an artifact behind it.
 
 \section{Related Work}
 

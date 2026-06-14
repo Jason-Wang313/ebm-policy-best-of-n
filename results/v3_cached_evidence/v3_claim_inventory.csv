@@ -1,0 +1,5 @@
+kind,status,count
+promoted_claim,SUPPORTED,16
+promoted_claim,PARTIAL,0
+promoted_claim,UNSUPPORTED,0
+boundary,UNSUPPORTED_NON_CLAIM,3
