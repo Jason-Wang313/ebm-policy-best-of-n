@@ -1,0 +1,13 @@
+policy,claim_role,tasks,mean_success_rate,min_task_success_rate,mean_total_reward,mean_fallback_rate,runtime_scripted_expert_dependency,uses_learned_demo_proposal,uses_learned_bc_proposal,uses_state_heuristic_proposal
+expert_centered_gate,expert_dependency_boundary,4,1.0,1.0,153.20396550532038,0.13857330873740129,True,False,False,False
+expert_centered_no_gate,expert_dependency_boundary,4,0.65,0.0,121.80515300471495,0.0,True,False,False,False
+learned_bc_proposal_direct,learned_policy_boundary,4,0.5,0.4,149.29462453198644,0.0,False,False,True,False
+learned_bc_proposal_no_gate,learned_policy_boundary,4,0.39999999999999997,0.2,170.39003190263722,0.0,False,False,True,False
+learned_demo_proposal_direct,learned_policy_boundary,4,0.3,0.0,184.5605164251255,0.0,False,True,False,False
+learned_demo_proposal_no_gate,learned_policy_boundary,4,0.3,0.0,168.6757614216322,0.0,False,True,False,False
+local_gaussian_no_gate,stress_baseline,4,0.05,0.0,121.57599981848536,0.0,False,False,False,False
+mixed_expert_local_no_gate,expert_dependency_boundary,4,0.2,0.0,89.77228800333401,0.0,True,False,False,False
+random_uniform,negative_control,4,0.0,0.0,47.52047396209455,0.0,False,False,False,False
+scripted_expert,expert_dependency_boundary,4,1.0,1.0,150.33240543190908,0.0,True,False,False,False
+state_heuristic_direct,supported_low_dependency_state_heuristic,4,1.0,1.0,150.33242572190943,0.0,False,False,False,True
+state_heuristic_proposal_no_gate,supported_low_dependency_state_heuristic,4,1.0,1.0,152.78304552702508,0.0,False,False,False,True

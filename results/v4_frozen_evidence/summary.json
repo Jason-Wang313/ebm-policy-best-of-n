@@ -1,12 +1,18 @@
 {
-  "artifact_files": 157,
+  "artifact_files": 160,
+  "benchmark_claim_rows": 36,
+  "claim_gate_rows": 9,
+  "claim_gates_passed": 9,
   "closed_loop_policies": 12,
   "closed_loop_rows": 48,
   "closed_loop_tasks": 4,
+  "compute_stress_rows": 3,
+  "compute_utility_drop_steps": 51,
   "controlled_high_n_rows": 9,
   "controlled_models": 9,
   "controlled_pool_n": 1024,
   "controlled_seeds": 5,
+  "dependency_stress_rows": 12,
   "exact_law_max_abs_error": 0.013725862793312171,
   "figure_files": 10,
   "learned_bc_success": 0.39999999999999997,
@@ -16,6 +22,7 @@
   "main_repair_mean_recovery": 0.9719124670943302,
   "main_repair_utility_degrading_rows": 0,
   "main_repair_worst_recovery": 0.9624453063383376,
+  "metaworld_ci_rows": 36,
   "metaworld_tasks": 4,
   "non_claim_boundaries": 3,
   "not_clone_checks_passed": 18,
@@ -32,6 +39,7 @@
   "raw_high_n_utility": -1.5376771844910189,
   "raw_tail_rank_correlation": 0.023992673992673994,
   "reliability_extreme_tail_rows": 80,
+  "reliability_gap_rows": 16,
   "reliability_rows": 1600,
   "state_heuristic_success": 1.0,
   "supported_claims": 16,
@@ -39,5 +47,5 @@
   "torch_loss_decrease": 5.522562724848588,
   "torch_raw_high_n_utility": 1.6146664368430805,
   "unsupported_claims": 0,
-  "v3_figure_files": 6
+  "v4_figure_files": 9
 }

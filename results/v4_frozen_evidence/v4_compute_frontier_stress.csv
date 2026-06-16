@@ -1,0 +1,4 @@
+policy,rows,max_energy_evaluations,best_selected_real_utility,worst_selected_real_utility,mean_utility_per_energy_eval,utility_drop_steps
+cem_like_topk_refinement,50,1024.0,-1.1262967604766196,-1.373136440462524,-0.12152758080562424,9
+langevin_like_refinement,50,1024.0,0.6982363295696347,-1.3717739585061786,0.021225762424752614,21
+sample_only,50,512.0,0.6874899605226137,-1.391765554599085,0.04088391412074555,21

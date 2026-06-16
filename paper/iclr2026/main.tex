@@ -8,10 +8,11 @@
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{array}
-\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,citecolor=green!45!black,linkcolor=blue!55!black,urlcolor=blue!55!black]{hyperref}
 \usepackage{url}
 
-\graphicspath{{../../results/figures/}{../../results/figures/v3/}}
+\graphicspath{{../../results/figures/}{../../results/figures/v4/}}
 
 \title{Low Energy Is Not Enough:\\Tail Audits for Energy-Based Robot Policies}
 
@@ -22,7 +23,7 @@
 \newcommand{\score}{S_\theta}
 \newcommand{\utility}{U}
 \newcommand{\candidates}{\mathcal{A}}
-\input{v3_results_macros.tex}
+\input{v4_results_macros.tex}
 
 % \iclrfinalcopy
 
@@ -31,6 +32,7 @@
 
 \begin{abstract}
 Energy-based robot policies make inference an optimization problem: sample or refine candidate actions, score them by energy, and execute the lowest-energy candidate. We show that this common selection-budget knob is selected low-energy-tail optimization rather than ordinary average-case sampling. For any fixed candidate generator, energy scorer, and utility measurement, a finite tie-aware law exactly predicts selected utility from the score groups of the candidate pool. This law makes a simple failure mode explicit: increasing \(N\) can monotonically improve selected energy while decreasing real utility if the low-energy tail is miscalibrated. We instantiate this mechanism in controlled action-selection tasks and learned IBC-style energy models, add selected-tail reliability diagrams and compute frontiers, and evaluate repair stacks that combine support penalties, pilot-label calibration, and conservative high-\(N\) gates. On supported local stress tests, the main repair stack recovers \(0.972\) of the measured oracle-minus-raw high-\(N\) gap by a predefined recovery-ratio metric. A guarded Meta-World ladder and closed-loop dependency audit provide simulator evidence while preserving the claim boundary: no real-robot validation is claimed, and autonomous learned-policy Meta-World success remains unsupported.
+V4 freezes this protocol as an adversarial evidence cache: \VFourEBMClaimGatesPassed{}/\VFourEBMClaimGatesTotal{} claim gates pass, \VFourEBMBenchmarkClaimRows{} Meta-World selected-action rows keep confidence intervals and negative controls visible, \VFourEBMDependencyStressRows{} closed-loop policy rows expose proposal dependence, and \VFourEBMComputeDropSteps{} compute-frontier steps show utility drops under extra optimization. The result is not a universal EBM success theorem; it is a benchmark-gated audit showing exactly where low-energy selection helps, fails, or must be scoped.
 \end{abstract}
 
 \section{Introduction}
@@ -210,116 +212,157 @@ scripted expert & 1.00 & 143.14 & 0.000 \\
     \label{fig:dependency}
 \end{figure}
 
-\section{V3 Evidence Audit}
-\label{sec:v3-evidence-audit}
+\section{V4 Evidence Audit}
+\label{sec:V4-evidence-audit}
 
-The v3 revision promotes an audit layer over the generated artifacts rather
-than changing the scope of the claim. The script
-\texttt{experiments/v3\_cached\_evidence.py} reads the committed CSV/JSON
-outputs, claim ledger, simulator-dependency tables, optional adapter rollouts,
-and figure inventory; writes compact summaries under
-\texttt{results/v3\_cached\_evidence}; creates six additional figures under
-\texttt{results/figures/v3}; and exports the macros used in this section. The
-process is intentionally RAM-light: it aggregates existing CPU artifacts
-instead of rerunning Meta-World or retraining the learned EBMs.
+V4 freezes the protocol after the failure modes are found. The script
+\texttt{experiments/v4\_frozen\_evidence.py} does not train models, tune
+thresholds, or rerun Meta-World. It reads committed CSV/JSON artifacts and
+asks a stricter question: which claims survive the strongest fair baselines,
+which baselines expose missing mechanisms, and which endpoints must remain
+non-claims? The cache writes \VFourEBMClaimGatesTotal{} claim gates,
+\VFourEBMBenchmarkClaimRows{} Meta-World selected-action rows,
+\VFourEBMDependencyStressRows{} closed-loop policy stress rows,
+\VFourEBMReliabilityGapRows{} reliability tail-gap rows, and
+\VFourEBMComputeDropSteps{} compute-frontier utility-drop steps under
+\texttt{results/v4\_frozen\_evidence}. All
+\VFourEBMClaimGatesPassed{} claim gates pass before this PDF is treated as
+final.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.92\linewidth]{v3_energy_tail_failure_matrix.pdf}
-    \caption{V3 high-\(N\) selected-tail failure matrix. At \(N=512\), the
+    \includegraphics[width=0.92\linewidth]{v4_energy_tail_failure_matrix.pdf}
+    \caption{V4 high-\(N\) selected-tail failure matrix. At \(N=512\), the
     strongest raw miscalibrated row has selected energy
-    \VThreeEBMRawHighNEnergy{}, selected real utility
-    \VThreeEBMRawHighNUtility{}, invalid-action rate
-    \VThreeEBMRawHighNInvalid{}, and tail-rank correlation
-    \VThreeEBMRawTailRankCorr{}.}
-    \label{fig:v3-tail-matrix}
+    \VFourEBMRawHighNEnergy{}, selected real utility
+    \VFourEBMRawHighNUtility{}, invalid-action rate
+    \VFourEBMRawHighNInvalid{}, and tail-rank correlation
+    \VFourEBMRawTailRankCorr{}.}
+    \label{fig:V4-tail-matrix}
 \end{figure}
 
+The first gate is the EBM mechanism itself. Figure~\ref{fig:V4-tail-matrix}
+shows that the deployed object is an action from a conditional energy surface,
+not an imagined rollout or text answer. At high \(N\), the selected action can
+move into a low-energy but invalid or out-of-support tail: the strongest row
+has selected energy \VFourEBMRawHighNEnergy{}, selected utility
+\VFourEBMRawHighNUtility{}, support distance
+\VFourEBMRawSupportDistance{}, and high-\(N\) regret
+\VFourEBMRawHighNRegret{}. The paper therefore does not claim that more
+candidates are intrinsically bad. It claims that increasing \(N\) is safe only
+when the selected low-energy tail remains aligned with measured utility.
+
 \begin{figure}[t]
     \centering
     \begin{minipage}{0.49\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{v3_repair_recovery_stress.pdf}
+        \includegraphics[width=\linewidth]{v4_repair_recovery_stress.pdf}
     \end{minipage}
     \begin{minipage}{0.49\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{v3_closed_loop_dependency_audit.pdf}
+        \includegraphics[width=\linewidth]{v4_closed_loop_dependency_audit.pdf}
     \end{minipage}
-    \caption{V3 repair and dependency audits. The main repair stack reaches
-    mean recovery \VThreeEBMRepairMeanRecovery{} and worst-case recovery
-    \VThreeEBMRepairWorstRecovery{} with
-    \VThreeEBMRepairDegrades{} utility-degrading rows, while the closed-loop
+    \caption{V4 repair and dependency audits. The main repair stack reaches
+    mean recovery \VFourEBMRepairMeanRecovery{} and worst-case recovery
+    \VFourEBMRepairWorstRecovery{} with
+    \VFourEBMRepairDegrades{} utility-degrading rows, while the closed-loop
     dependency audit keeps learned-proposal and state-heuristic outcomes
     separate.}
-    \label{fig:v3-repair-dependency}
+    \label{fig:V4-repair-dependency}
 \end{figure}
 
-The v3 artifact has \VThreeEBMSupportedClaims{} supported promoted claim
-categories, \VThreeEBMPartialClaims{} partial promoted claims, and
-\VThreeEBMUnsupportedClaims{} unsupported promoted claims. It also keeps
-\VThreeEBMNonClaimBoundaries{} unsupported endpoints as explicit non-claim
-boundaries. This distinction is important: a boundary is not a failed paper
-claim; it is a guardrail preventing the manuscript from implying real-robot
-validation, broad manipulation success, or autonomous learned-policy
-Meta-World success that the artifacts do not support.
+The second gate is repair scope. The main repair stack nearly closes the
+measured oracle-minus-raw gap by Equation~\ref{eq:recovery}, with mean recovery
+\VFourEBMRepairMeanRecovery{}, worst-case recovery
+\VFourEBMRepairWorstRecovery{}, and \VFourEBMRepairDegrades{}
+utility-degrading rows. It still reports \VFourEBMRepairFailures{} diagnostic
+repair failure. That failure is retained because repair is a measured
+selection rule, not a universal safety theorem. The PyTorch EBM provides the
+opposite control: contrastive loss decreases by
+\VFourEBMTorchLossDecrease{} and raw high-\(N\) utility reaches
+\VFourEBMTorchRawUtility{}, so the paper is not arguing that EBMs inherently
+fail.
 
-The main failure evidence is still Figure~\ref{fig:v3-tail-matrix}. It is
-specific to EBMs because the deployed object is not a generated text answer,
-latent prediction, or imagined rollout. The selected object is an action from
-a candidate set, and inference chooses it by minimizing conditional energy
-\(\energy(o,a)\). At high \(N\), the low-energy tail can move out of support:
-the strongest row has support distance \VThreeEBMRawSupportDistance{} and
-high-\(N\) regret \VThreeEBMRawHighNRegret{}. Thus the central claim is not
-``more samples are bad.'' It is that extra candidates are beneficial only when
-the selected low-energy tail remains aligned with measured task utility.
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.94\linewidth]{v4_metaworld_selected_action_ci.pdf}
+    \caption{V4 Meta-World selected-action confidence rows. Primary
+    expert-action EBMs, calibrated rows, and high-reward negative-control
+    ablations remain side by side; all benchmark claims are simulator-bound.}
+    \label{fig:v4-metaworld-ci}
+\end{figure}
 
-The positive result is also scoped. The main repair stack nearly closes the
-measured oracle-minus-raw gap by Equation~\ref{eq:recovery}, but it still
-reports \VThreeEBMRepairFailures{} diagnostic repair failure. That failure is
-not hidden. It is what keeps the repair claim metric-bound rather than
-universal. The PyTorch EBM provides the contrasting aligned-tail artifact:
-its contrastive loss decreases by \VThreeEBMTorchLossDecrease{} and its raw
-high-\(N\) selected utility is \VThreeEBMTorchRawUtility{}. The paper therefore
-does not claim EBMs inherently fail; it claims the selected tail must be
-audited.
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.94\linewidth]{v4_dependency_claim_gate.pdf}
+    \caption{V4 dependency claim gate. State-heuristic rows support a
+    low-dependency simulator boundary; learned-proposal rows remain below the
+    autonomous learned-policy threshold and therefore block autonomy wording.}
+    \label{fig:v4-dependency-gate}
+\end{figure}
+
+The third gate is benchmark honesty. The selected-action Meta-World table is
+kept, but Figure~\ref{fig:v4-metaworld-ci} adds a frozen comparison matrix
+with confidence intervals and negative controls. The closed-loop gate in
+Figure~\ref{fig:v4-dependency-gate} is stricter: it removes scripted
+continuation and compares \VFourEBMClosedLoopPolicies{} policy variants across
+\VFourEBMClosedLoopTasks{} tasks. State-heuristic variants reach mean success
+\VFourEBMStateHeuristicSuccess{}, while learned-demo and behavior-cloned
+proposal variants reach \VFourEBMLearnedDemoSuccess{} and
+\VFourEBMLearnedBCSuccess{}. Those learned rows are not embarrassing side
+notes; they are the reason autonomous learned-policy Meta-World success is not
+claimed.
 
 \begin{figure}[t]
     \centering
     \begin{minipage}{0.49\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{v3_claim_boundary_inventory.pdf}
+        \includegraphics[width=\linewidth]{v4_claim_boundary_inventory.pdf}
     \end{minipage}
     \begin{minipage}{0.49\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{v3_optional_rollout_boundary.pdf}
+        \includegraphics[width=\linewidth]{v4_optional_rollout_boundary.pdf}
     \end{minipage}
-    \caption{V3 claim-boundary and optional-adapter inventories. Optional
-    adapters cover \VThreeEBMOptionalSuites{} non-Meta-World suites and contain
-    \VThreeEBMOptionalNonzero{} nonzero success row, but remain finite
+    \caption{V4 claim-boundary and optional-adapter inventories. Optional
+    adapters cover \VFourEBMOptionalSuites{} non-Meta-World suites and contain
+    \VFourEBMOptionalNonzero{} nonzero success row, but remain finite
     guarded rollout evidence only.}
-    \label{fig:v3-boundaries}
+    \label{fig:V4-boundaries}
 \end{figure}
 
-The simulator ladder is deliberately split. The selected-action Meta-World
-benchmark covers \VThreeEBMMetaworldTasks{} tasks, but the stronger operational
-test is the \VThreeEBMClosedLoopRows{}-row closed-loop dependency audit across
-\VThreeEBMClosedLoopPolicies{} policy variants and
-\VThreeEBMClosedLoopTasks{} tasks. State-heuristic variants reach mean success
-\VThreeEBMStateHeuristicSuccess{}, while learned-demo and behavior-cloned
-proposal variants reach \VThreeEBMLearnedDemoSuccess{} and
-\VThreeEBMLearnedBCSuccess{}. This is why the paper can support a
-state-heuristic low-dependency simulator boundary without claiming autonomous
-learned-policy success.
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.95\linewidth]{v4_reliability_compute_stress.pdf}
+    \caption{V4 adversarial stress summary. Left: worst extreme-low-energy
+    reliability gaps. Right: compute-budget steps where extra optimization
+    lowers measured utility. These rows force the paper to state when more
+    inference is useful and when it is not.}
+    \label{fig:v4-reliability-compute}
+\end{figure}
 
-Finally, v3 makes the artifact surface inspectable. The evidence cache records
-\VThreeEBMArtifactFiles{} audited non-cache files, \VThreeEBMFigureFiles{}
-paper-facing figures, \VThreeEBMVThreeFigures{} v3 figures,
-\VThreeEBMReliabilityRows{} reliability rows, and
-\VThreeEBMOptimizationRows{} compute-frontier rows. The exact-law validation
-has max absolute error \VThreeEBMExactMaxError{}. These numbers matter because
-the paper is submission-ready only if a fresh reviewer or fresh agent can
-locate the evidence, rebuild the figures, and verify that every promoted claim
-has an artifact behind it.
+The fourth gate is negative-control visibility. Optional Gymnasium, ManiSkill,
+and robosuite adapters cover \VFourEBMOptionalSuites{} non-Meta-World suites
+and include \VFourEBMOptionalNonzero{} nonzero scripted success row, but
+Figure~\ref{fig:V4-boundaries} keeps them as finite guarded rollout evidence.
+Figure~\ref{fig:v4-reliability-compute} adds the adversarial reliability and
+compute checks: extreme low-energy buckets are compared against the rest of
+their pools, and compute-frontier sweeps retain
+\VFourEBMComputeDropSteps{} utility-drop steps instead of hiding them behind a
+best-budget headline.
+
+Finally, V4 makes the artifact surface inspectable. The evidence cache records
+\VFourEBMArtifactFiles{} audited non-cache files, \VFourEBMFigureFiles{}
+paper-facing figures, \VFourEBMVFourFigures{} V4 figures,
+\VFourEBMReliabilityRows{} reliability rows, and
+\VFourEBMOptimizationRows{} compute-frontier rows. The claim ledger has
+\VFourEBMSupportedClaims{} supported promoted categories,
+\VFourEBMPartialClaims{} partial categories, and
+\VFourEBMUnsupportedClaims{} unsupported promoted categories, plus
+\VFourEBMNonClaimBoundaries{} explicit unsupported non-claim endpoints. The
+exact-law validation has max absolute error \VFourEBMExactMaxError{}. These
+numbers matter because submission readiness here means that a fresh reviewer
+can locate the evidence, rebuild the figures, and see exactly which baseline
+or stress test blocks each overclaim.
 
 \section{Related Work}
 

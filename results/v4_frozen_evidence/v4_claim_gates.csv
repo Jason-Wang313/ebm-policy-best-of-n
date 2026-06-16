@@ -1,0 +1,10 @@
+gate,status,threshold,observed,claim_effect
+claim_ledger_clean,PASS,"supported>=16, partial=0, unsupported=0",16/0/0,Allows promoted claims to stay in the main text.
+exact_law_validated,PASS,max exact-law error <= 0.02,0.0137,Allows finite-law accounting to be used as measurement.
+low_energy_tail_failure_present,PASS,raw high-N utility < -1 and invalid >= .99,"-1.538, 1.000",Allows the EBM-specific failure mechanism claim.
+repair_metric_gate,PASS,mean/worst recovery >= .95 and no utility degradation,0.972/0.962,Allows near-complete repair only under the recovery-ratio metric.
+real_benchmark_ladder_present,PASS,>=4 Meta-World tasks and closed-loop tasks,4/4,"Allows simulator benchmark language, not robot language."
+closed_loop_boundary_enforced,PASS,state heuristic succeeds; learned proposal threshold fails,1.000/0.300/0.400,Blocks autonomous learned-policy Meta-World claims.
+optional_adapter_boundary,PASS,>=3 optional suites and >=1 nonzero scripted success row,3/1,Allows finite adapter-execution evidence only.
+reliability_and_compute_stress_present,PASS,"reliability>=1600, compute>=150, compute drops>=5",1600/150/51,Forces negative controls and compute-regression rows into the audit.
+non_claim_boundaries_retained,PASS,>=3 unsupported non-claim boundaries,3,"Keeps real-robot, broad-success, and learned-autonomy endpoints out of supported claims."

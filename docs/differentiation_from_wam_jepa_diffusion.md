@@ -95,4 +95,7 @@ The allowed central claim is narrower: tail selection inference for energy-based
 robot policies helps only when the low-energy selected tail is aligned with
 real utility; otherwise energy can improve while utility saturates or degrades,
 and tail calibration, support awareness, or verification can repair the selected
-tail in controlled and learned toy settings.
+tail in controlled artifacts, learned IBC-style EBM artifacts, guarded
+Meta-World simulator audits, and finite optional adapter rollouts. The claim is
+still not real-robot validation, broad manipulation success, or autonomous
+learned-policy Meta-World success.

@@ -1,5 +1,22 @@
 # Final Audit
 
+## V4 Submission Package
+
+V4 adds a frozen adversarial evidence layer without rerunning the heavy
+Meta-World stack. The build path is:
+
+- `python scripts/build_v4_paper.py`
+- `python scripts/run_v4_claim_audit.py`
+- `pytest`
+
+Current v4 frozen evidence is under `results/v4_frozen_evidence/`. It reports
+9/9 passing claim gates, 36 Meta-World selected-action confidence rows, 12
+closed-loop dependency stress rows, 16 reliability tail-gap rows, 51
+compute-frontier utility-drop steps, 151 audited non-cache files, and 9 v4
+figures. The final versioned PDF is
+`paper/final/ebm-policy-best-of-n-v4.pdf` and the visible Desktop copy must
+have the same SHA-256 hash.
+
 ## 1. Required Command Results
 
 - `python experiments/run_metaworld_benchmark.py`: PASS, 1334.1 s for the full twelve-variant, five-seed, four-task Meta-World child cache refresh; later aggregate refreshes reused the versioned child artifacts.

@@ -45,6 +45,24 @@ bash scripts/run_claim_audit.sh
 pytest
 ```
 
+## Final v4 Submission Package
+
+The submission artifact is built from the RAM-light frozen evidence path:
+
+```bash
+python scripts/build_v4_paper.py
+python scripts/run_v4_claim_audit.py
+pytest
+```
+
+The v4 cache does not rerun Meta-World or retrain EBMs. It audits the committed
+CSV/JSON artifacts, writes `results/v4_frozen_evidence/`, exports
+`paper/iclr2026/v4_results_macros.tex`, creates nine v4 figures under
+`results/figures/v4/`, and copies `paper/final/ebm-policy-best-of-n-v4.pdf`
+to the visible Desktop. The v4 claim gates currently report 9/9 passing gates,
+36 Meta-World selected-action confidence rows, 12 closed-loop dependency stress
+rows, 16 reliability tail-gap rows, and 51 compute-frontier utility-drop steps.
+
 The full run is CPU-only and includes learned NumPy/PyTorch IBC-style EBMs plus
 a guarded Meta-World benchmark ladder over `reach-v3`, `push-v3`,
 `pick-place-v3`, and `button-press-v3`, when the local simulator stack is
@@ -92,6 +110,14 @@ not degrade utility in the generated local artifacts.
 - Exact law validation: `results/exact_law/validation.csv`
 - Claim audit: `results/claims_status.md`
 - Final audit: `docs/final_audit.md`
+- V4 claim gates: `results/v4_frozen_evidence/v4_claim_gates.csv`
+- V4 Meta-World claim matrix:
+  `results/v4_frozen_evidence/v4_metaworld_claim_matrix.csv`
+- V4 dependency stress:
+  `results/v4_frozen_evidence/v4_policy_dependency_stress.csv`
+- V4 reliability/compute stress:
+  `results/v4_frozen_evidence/v4_reliability_tail_gaps.csv` and
+  `results/v4_frozen_evidence/v4_compute_frontier_stress.csv`
 
 ## Key Figures
 
@@ -108,6 +134,9 @@ CSV/JSON only:
 - `results/figures/figure8_repair_recovery_ratio.png`
 - `results/figures/figure9_attack_surface_audit.png`
 - `results/figures/figure10_closed_loop_dependency_audit.png`
+- `results/figures/v4/v4_metaworld_selected_action_ci.pdf`
+- `results/figures/v4/v4_dependency_claim_gate.pdf`
+- `results/figures/v4/v4_reliability_compute_stress.pdf`
 
 ## Claim Boundaries
 

@@ -8,6 +8,7 @@
   extreme-tail inference in energy-based robot policies.
 - Primary claim boundary: no real-robot validation and no broad manipulation
   success claim.
+- Current final artifact target: `ebm-policy-best-of-n-v4.pdf`.
 
 ## Implemented Upgrade
 
@@ -39,9 +40,19 @@
   learned-policy success even after behavior-cloned learned proposal rows are
   added.
 - Updated README, theory docs, paper docs, claim docs, tests, and final audit.
+- Added v4 frozen evidence under `results/v4_frozen_evidence/`.
+- Added v4 claim gates, Meta-World selected-action CI rows, dependency stress
+  rows, reliability tail-gap rows, compute-frontier stress rows, and nine v4
+  PDF figures under `results/figures/v4/`.
+- Updated the anonymous paper to use visible green citation links and the v4
+  claim-gated benchmark protocol.
 
 ## Final Command Results
 
+- V4 submission commands:
+  - `python scripts/build_v4_paper.py`
+  - `python scripts/run_v4_claim_audit.py`
+  - `pytest`
 - `python experiments/run_metaworld_benchmark.py`: PASS, 1334.1 s for the full
   twelve-variant, five-seed, four-task Meta-World child cache refresh.
 - `bash scripts/run_smoke.sh`: PASS, 556.7 s.
@@ -61,6 +72,10 @@
 - Claim ledger: `results/claims_status.json`
 - Optional non-Meta-World rollouts:
   `results/optional_benchmarks/summary.csv`
+- V4 claim gates: `results/v4_frozen_evidence/v4_claim_gates.csv`
+- V4 benchmark claim matrix:
+  `results/v4_frozen_evidence/v4_metaworld_claim_matrix.csv`
+- V4 final PDF: `paper/final/ebm-policy-best-of-n-v4.pdf`
 - Final audit: `docs/final_audit.md`
 
 ## Weakest Remaining Claim

@@ -11,7 +11,7 @@ Conditional on this event, all selected candidates have score \(s_k\). If tie-br
 
 \subsection{Artifact map}
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering
 \small
 \setlength{\tabcolsep}{4pt}
@@ -36,7 +36,7 @@ Claim audit & \texttt{results/claims\_status.json}, \texttt{docs/claims.md} \\
 
 \subsection{Claim ledger summary}
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering
 \small
 \setlength{\tabcolsep}{4pt}
@@ -61,7 +61,7 @@ Unsupported non-claim & Broad manipulation success is not claimed. \\
 
 \subsection{Repair stress details}
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering
 \small
 \setlength{\tabcolsep}{4pt}
@@ -83,7 +83,7 @@ oracle & 1.000 & 1.000 & 0 & 0 \\
 
 \subsection{Optional guarded rollout adapters}
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering
 \small
 \setlength{\tabcolsep}{4pt}
@@ -104,28 +104,28 @@ robosuite & Lift & 2 & 55.757 & 0.275 \\
 
 \subsection{Additional figures}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\linewidth]{figure4_tail_rank_and_tail_utility.png}
     \caption{Tail rank and tail utility diagnostics.}
     \label{fig:tail-rank-appendix}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\linewidth]{figure6_multitask_benchmark_table.png}
     \caption{Generated multi-task benchmark table.}
     \label{fig:benchmark-table-appendix}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\linewidth]{figure7_repair_ablations.png}
     \caption{Repair ablations.}
     \label{fig:repair-ablations-appendix}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\linewidth]{figure9_attack_surface_audit.png}
     \caption{Attack-surface and claim-boundary audit figure.}
@@ -133,10 +133,10 @@ robosuite & Lift & 2 & 55.757 & 0.275 \\
 \end{figure}
 
 \clearpage
-\subsection{V3 reviewer audit and execution plan}
-\label{app:v3-reviewer-audit}
+\subsection{V4 reviewer audit and execution plan}
+\label{app:V4-reviewer-audit}
 
-This appendix records the v3 audit added to make the paper submission-ready
+This appendix records the V4 audit added to make the paper submission-ready
 under a strict reading. The objective is not to make a short manuscript look
 long by expanding prose around a shared top-\(N\) theorem. The objective is to
 make the EBM-policy claim auditable from multiple directions: finite-law
@@ -147,11 +147,11 @@ other tail-selection papers: its object is conditional action energy, not a
 world-action rollout, latent JEPA prediction, diffusion future sample, or
 language-model answer.
 
-The execution plan for v3 is deliberately two-layered. The heavy experiment
+The execution plan for V4 is deliberately two-layered. The heavy experiment
 layer is already present in the repository and includes the controlled tail
 tables, learned NumPy and PyTorch IBC-style EBMs, Meta-World task artifacts,
 closed-loop dependency rollouts, optional adapters, repair hierarchies,
-reliability diagrams, and compute frontiers. The v3 verification layer is
+reliability diagrams, and compute frontiers. The V4 verification layer is
 RAM-light. It reads those artifacts, constructs compact summaries, compiles
 the paper, and checks the final PDF. A fresh reviewer should not need to rerun
 the thousand-second simulator stack just to verify that the submitted paper
@@ -165,23 +165,23 @@ aligned with real utility in the selected tail. The finite law gives exact
 selected utility for a fixed candidate/scorer/utility stack; the experiments
 show that this quantity can go down even as energy improves.
 
-\paragraph{Primary gap before v3.}
+\paragraph{Primary gap before V4.}
 The evidence was stronger than the ten-page manuscript. A reviewer could see
 tables and docs in the repository, but the paper did not expose enough of the
 attack surface: the repair metric, the proposal-dependency ladder, the
 optional adapter boundaries, and the distinction between state-heuristic
-success and autonomous learned-policy success. V3 promotes those facts into
+success and autonomous learned-policy success. V4 promotes those facts into
 the paper instead of leaving them as hidden repository context.
 
 \paragraph{RAM-light standard.}
-The v3 script does not train models or run simulators. It reads
-\VThreeEBMArtifactFiles{} non-cache artifacts, writes compact CSV summaries,
-creates \VThreeEBMVThreeFigures{} deterministic v3 figures, and exports
+The V4 script does not train models or run simulators. It reads
+\VFourEBMArtifactFiles{} non-cache artifacts, writes compact CSV summaries,
+creates \VFourEBMVFourFigures{} deterministic V4 figures, and exports
 macros. This keeps verification cheap while preserving the full regeneration
 path for reviewers who want to rerun the experiments.
 
 \subsection{Evidence-to-claim ledger}
-\label{app:v3-evidence-ledger}
+\label{app:V4-evidence-ledger}
 
 The first harsh-review question is whether every promoted claim has the right
 kind of evidence. A theorem claim needs proof and exact-law validation. A
@@ -190,38 +190,38 @@ EBM claim needs training diagnostics and selected-tail metrics. A simulator
 claim needs task-level rollouts and dependency annotations. A boundary claim
 needs explicit unsupported entries rather than vague caveats.
 
-\begin{table}[h]
+\begin{table}[htbp]
 \centering
 \small
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{p{0.23\linewidth}p{0.32\linewidth}p{0.34\linewidth}}
 \toprule
-Claim surface & Required evidence & V3 boundary \\
+Claim surface & Required evidence & V4 boundary \\
 \midrule
-Finite law & Proof and max exact-law error \VThreeEBMExactMaxError{} & Identity for fixed candidate/scorer/utility stacks only. \\
-Controlled failure & \VThreeEBMControlledSeeds{} seeds, \VThreeEBMControlledModels{} scorer families, pool size \VThreeEBMControlledPool{} & Controlled action tasks, not real robots. \\
+Finite law & Proof and max exact-law error \VFourEBMExactMaxError{} & Identity for fixed candidate/scorer/utility stacks only. \\
+Controlled failure & \VFourEBMControlledSeeds{} seeds, \VFourEBMControlledModels{} scorer families, pool size \VFourEBMControlledPool{} & Controlled action tasks, not real robots. \\
 Learned EBM & NumPy and PyTorch IBC-style artifacts with training metadata & Small local EBMs, not universal EBM training. \\
-Repair & Mean recovery \VThreeEBMRepairMeanRecovery{}, worst recovery \VThreeEBMRepairWorstRecovery{}, zero utility-degrading rows & Metric-bound gap recovery, not safety certification. \\
-Simulator ladder & \VThreeEBMMetaworldTasks{} Meta-World tasks and closed-loop dependency audit & Simulator evidence with proposal dependencies reported. \\
-Optional adapters & \VThreeEBMOptionalSuites{} non-Meta-World suites and finite rollout rows & Adapter execution only; not broad manipulation success. \\
+Repair & Mean recovery \VFourEBMRepairMeanRecovery{}, worst recovery \VFourEBMRepairWorstRecovery{}, zero utility-degrading rows & Metric-bound gap recovery, not safety certification. \\
+Simulator ladder & \VFourEBMMetaworldTasks{} Meta-World tasks and closed-loop dependency audit & Simulator evidence with proposal dependencies reported. \\
+Optional adapters & \VFourEBMOptionalSuites{} non-Meta-World suites and finite rollout rows & Adapter execution only; not broad manipulation success. \\
 \bottomrule
 \end{tabular}
-\caption{V3 evidence-to-claim ledger. Each row names the evidence type and the boundary that prevents overclaiming.}
-\label{tab:v3-evidence-ledger}
+\caption{V4 evidence-to-claim ledger. Each row names the evidence type and the boundary that prevents overclaiming.}
+\label{tab:V4-evidence-ledger}
 \end{table}
 
-The claim ledger contains \VThreeEBMSupportedClaims{} supported promoted
-categories, \VThreeEBMPartialClaims{} partial promoted categories, and
-\VThreeEBMUnsupportedClaims{} unsupported promoted categories. The paper also
-keeps \VThreeEBMNonClaimBoundaries{} unsupported endpoints as non-claim
+The claim ledger contains \VFourEBMSupportedClaims{} supported promoted
+categories, \VFourEBMPartialClaims{} partial promoted categories, and
+\VFourEBMUnsupportedClaims{} unsupported promoted categories. The paper also
+keeps \VFourEBMNonClaimBoundaries{} unsupported endpoints as non-claim
 boundaries. That design is important. A non-claim boundary is a statement that
 the current artifacts do not prove an endpoint; it is not a hidden claim with
 weak evidence.
 
 \subsection{Low-energy-tail failure taxonomy}
-\label{app:v3-failure-taxonomy}
+\label{app:V4-failure-taxonomy}
 
-The v3 paper distinguishes five failure modes. The first is shortcut energy:
+The V4 paper distinguishes five failure modes. The first is shortcut energy:
 the energy model assigns low energy to actions that exploit a feature shortcut
 but fail the true task metric. This is the cleanest EBM-specific failure
 because the deployed optimizer does exactly what it was asked to do: find low
@@ -230,9 +230,9 @@ tail.
 
 The second failure mode is out-of-support low energy. An action can receive
 low energy even though it lies far from the behavior or expert support used to
-train the scorer. In the strongest v3 row, support distance is
-\VThreeEBMRawSupportDistance{} and invalid-action rate is
-\VThreeEBMRawHighNInvalid{}. A larger candidate budget increases the chance
+train the scorer. In the strongest V4 row, support distance is
+\VFourEBMRawSupportDistance{} and invalid-action rate is
+\VFourEBMRawHighNInvalid{}. A larger candidate budget increases the chance
 that the policy finds such actions. This is why support penalties are a
 repair component rather than a cosmetic diagnostic.
 
@@ -245,7 +245,7 @@ low-energy action remain executable when measured by the external utility?
 The fourth failure mode is learned-tail anti-correlation. A learned EBM can
 have acceptable average behavior but poor selected-tail behavior. Average
 training loss or global rank correlation is not enough because execution
-chooses one candidate from the extreme tail. V3 therefore reports selected
+chooses one candidate from the extreme tail. V4 therefore reports selected
 utility, low-energy tail utility, invalid rate, support distance, and tail
 rank correlation rather than relying on training loss alone.
 
@@ -257,7 +257,7 @@ behavior-cloned proposals, local Gaussian proposals, state heuristics, random
 actions, and scripted expert actions.
 
 \subsection{Selected-tail statistics policy}
-\label{app:v3-stat-policy}
+\label{app:V4-stat-policy}
 
 The paper reports several statistics that must not be mixed. Selected energy
 is what the EBM optimizes. Selected real utility is what the task receives.
@@ -270,8 +270,8 @@ candidate in the same pool.
 The finite law is not a model-performance number. It is an accounting identity
 for a fixed candidate pool and proposal distribution. The relevant validation
 question is whether implementation and Monte Carlo estimates match the exact
-selected-utility value. The v3 maximum absolute error is
-\VThreeEBMExactMaxError{}, small enough for the paper's tail curves to be
+selected-utility value. The V4 maximum absolute error is
+\VFourEBMExactMaxError{}, small enough for the paper's tail curves to be
 treated as artifact properties rather than sampling noise.
 
 Repair recovery is also not raw task success. It is defined as
@@ -279,17 +279,17 @@ Repair recovery is also not raw task success. It is defined as
 on the same candidate pool. This denominator matters. A repair can increase
 absolute utility while still leaving most of the pool's oracle utility unused.
 Conversely, a repair can look modest in absolute units but close most of the
-available gap if the raw-to-oracle gap is small. V3 uses near-complete repair
+available gap if the raw-to-oracle gap is small. V4 uses near-complete repair
 language only under this metric.
 
 The simulator tables report reward, success, and dependency fields separately.
 The selected-action benchmark uses scripted continuation after the selected
 first action. The closed-loop audit removes scripted continuation but still
 records proposal source. A single aggregate success number would hide the
-mechanism being audited, so v3 treats proposal source as part of the result.
+mechanism being audited, so V4 treats proposal source as part of the result.
 
 \subsection{Repair threat model}
-\label{app:v3-repair-threat-model}
+\label{app:V4-repair-threat-model}
 
 The repair stack combines support penalties, pilot-label calibration, and
 conservative gates. Each component has a different threat model. A support
@@ -305,36 +305,36 @@ therefore separated from deployable repairs. They show what would be possible
 with stronger information, not what the deployed method is allowed to use.
 
 At \(N=512\), the main repair stack reports mean recovery
-\VThreeEBMRepairMeanRecovery{} and worst-case recovery
-\VThreeEBMRepairWorstRecovery{}. It has \VThreeEBMRepairDegrades{}
-utility-degrading rows and \VThreeEBMRepairFailures{} diagnostic repair
+\VFourEBMRepairMeanRecovery{} and worst-case recovery
+\VFourEBMRepairWorstRecovery{}. It has \VFourEBMRepairDegrades{}
+utility-degrading rows and \VFourEBMRepairFailures{} diagnostic repair
 failure. This is a strong but not universal statement. The right reviewer
 response is not "calibration fixes EBMs"; it is "under the measured local
 stress tests, the combined repair recovers most of the available raw-to-oracle
 gap while preserving explicit failure diagnostics."
 
 \subsection{Closed-loop dependency attack}
-\label{app:v3-closed-loop-attack}
+\label{app:V4-closed-loop-attack}
 
 The harshest simulator attack is that the benchmark might be solving the task
-through proposal structure rather than learned energy. V3 answers by splitting
+through proposal structure rather than learned energy. V4 answers by splitting
 the simulator evidence. The selected-action table reports a finite benchmark
 artifact with scripted continuation. The dependency audit then removes
 scripted continuation and compares proposal families directly.
 
-The closed-loop audit has \VThreeEBMClosedLoopRows{} rows over
-\VThreeEBMClosedLoopPolicies{} policy variants and
-\VThreeEBMClosedLoopTasks{} tasks. The state-heuristic proposal with EBM
-selection reaches mean success \VThreeEBMStateHeuristicSuccess{}. Learned-demo
-and behavior-cloned proposal variants reach \VThreeEBMLearnedDemoSuccess{} and
-\VThreeEBMLearnedBCSuccess{}. Those numbers are not presented as a failure of
+The closed-loop audit has \VFourEBMClosedLoopRows{} rows over
+\VFourEBMClosedLoopPolicies{} policy variants and
+\VFourEBMClosedLoopTasks{} tasks. The state-heuristic proposal with EBM
+selection reaches mean success \VFourEBMStateHeuristicSuccess{}. Learned-demo
+and behavior-cloned proposal variants reach \VFourEBMLearnedDemoSuccess{} and
+\VFourEBMLearnedBCSuccess{}. Those numbers are not presented as a failure of
 the paper; they are presented as the boundary of the current simulator claim.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.84\linewidth]{v3_closed_loop_dependency_audit.pdf}
-    \caption{V3 closed-loop dependency audit. Expert-centered, learned-proposal, state-heuristic, random, and scripted variants are separated so the paper cannot silently claim autonomous learned-policy success.}
-    \label{fig:v3-closed-loop-appendix}
+    \includegraphics[width=0.84\linewidth]{v4_closed_loop_dependency_audit.pdf}
+    \caption{V4 closed-loop dependency audit. Expert-centered, learned-proposal, state-heuristic, random, and scripted variants are separated so the paper cannot silently claim autonomous learned-policy success.}
+    \label{fig:V4-closed-loop-appendix}
 \end{figure}
 
 The resulting supported claim is narrow but useful: the repository contains a
@@ -345,13 +345,13 @@ learned proposal that clears the threshold across tasks without runtime
 expert-centered candidates or state heuristics.
 
 \subsection{Optional adapter reading protocol}
-\label{app:v3-optional-protocol}
+\label{app:V4-optional-protocol}
 
 Optional Gymnasium, ManiSkill, and robosuite adapters are useful only if read
 honestly. They show that the code can execute finite guarded rollout adapters
-outside Meta-World. They do not show broad manipulation success. V3 reports
-\VThreeEBMOptionalSuites{} supported non-Meta-World suites and
-\VThreeEBMOptionalNonzero{} nonzero success row. The nonzero success row is
+outside Meta-World. They do not show broad manipulation success. V4 reports
+\VFourEBMOptionalSuites{} supported non-Meta-World suites and
+\VFourEBMOptionalNonzero{} nonzero success row. The nonzero success row is
 scripted and remains a finite simulator artifact.
 
 The correct reading protocol is: first, check whether the adapter ran; second,
@@ -360,15 +360,15 @@ separately; fourth, do not promote a suite-level success claim when the row is
 zero or unavailable. The claim audit enforces this by blocking optional
 success wording when optional success artifacts do not support it.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.82\linewidth]{v3_optional_rollout_boundary.pdf}
+    \includegraphics[width=0.82\linewidth]{v4_optional_rollout_boundary.pdf}
     \caption{Optional adapter evidence. Rewards and success are reported as finite guarded rollout artifacts, not as real-robot or broad manipulation validation.}
-    \label{fig:v3-optional-appendix}
+    \label{fig:V4-optional-appendix}
 \end{figure}
 
 \subsection{Non-duplicate identity firewall}
-\label{app:v3-identity-firewall}
+\label{app:V4-identity-firewall}
 
 The paper shares a finite tail-selection law with nearby projects, but the
 scientific object is different. This paper studies conditional action energy
@@ -392,10 +392,10 @@ closed-loop proposal-dependency audit all belong to that question. The law is
 the scale used to measure selected utility, not the identity of the paper.
 
 \subsection{Reviewer attack ledger}
-\label{app:v3-attack-ledger}
+\label{app:V4-attack-ledger}
 
 \paragraph{Attack: this is only toy evidence.}
-The response is partly yes. The clean failure mechanism is controlled. V3 does
+The response is partly yes. The clean failure mechanism is controlled. V4 does
 not hide that. The paper's value is isolating a selected-tail mechanism that
 can be audited before a larger robot benchmark claims high-\(N\) inference is
 safe. The simulator ladder adds artifact-scoped evidence, but no real-robot
@@ -422,18 +422,18 @@ therefore complementary to better training, not a replacement.
 \paragraph{Attack: calibration solves everything.}
 No. Calibration helps when pilot labels reveal a useful residual structure.
 It does not solve hidden unobservability, distribution shift, or missing
-features. V3 keeps repair failure rows, oracle upper bounds, and non-claim
+features. V4 keeps repair failure rows, oracle upper bounds, and non-claim
 boundaries visible.
 
 \paragraph{Attack: the Meta-World result is proposal-dependent.}
-Correct, and v3 makes that the point of the dependency audit. State heuristics
+Correct, and V4 makes that the point of the dependency audit. State heuristics
 clear the low-dependency threshold; learned-proposal variants do not clear the
 autonomous learned-policy threshold. The paper should be judged for reporting
 that boundary clearly, not for pretending it solved it.
 
 \paragraph{Attack: optional simulators are too weak.}
 Correct if interpreted as broad validation. Incorrect if interpreted as finite
-adapter execution evidence. V3 reports them only in the latter sense and keeps
+adapter execution evidence. V4 reports them only in the latter sense and keeps
 success availability explicit.
 
 \paragraph{Attack: this is distribution shift.}
@@ -443,7 +443,7 @@ is executed. Even a fixed model and fixed candidate generator can move from a
 useful typical action to a harmful low-energy tail action as \(N\) increases.
 
 \subsection{Per-artifact reading guide}
-\label{app:v3-artifact-reading-guide}
+\label{app:V4-artifact-reading-guide}
 
 \texttt{results/controlled\_energy\_tail/summary.csv} is the main endpoint
 table for controlled failures. It should be used for selected energy,
@@ -457,13 +457,13 @@ metrics. The PyTorch artifact is especially important because it shows an
 aligned-tail case; the paper is not claiming that every learned EBM fails.
 
 \texttt{results/reliability/summary.csv} is the selected-tail reliability
-table. It has \VThreeEBMReliabilityRows{} rows, including
-\VThreeEBMReliabilityExtremeRows{} extreme-tail rows. These rows ask whether
+table. It has \VFourEBMReliabilityRows{} rows, including
+\VFourEBMReliabilityExtremeRows{} extreme-tail rows. These rows ask whether
 energy quantiles have useful real utility, not whether the model is calibrated
 as a classifier.
 
 \texttt{results/optimization\_budget/summary.csv} is the compute-frontier
-table. It has \VThreeEBMOptimizationRows{} rows and should be used for
+table. It has \VFourEBMOptimizationRows{} rows and should be used for
 latency, energy-evaluation, refinement-step, and utility-per-evaluation
 statements. It should not be reduced to "more compute is good" or "more
 compute is bad"; the sign depends on tail alignment.
@@ -487,15 +487,15 @@ behavior-cloned proposals, state heuristics, or expert dependency.
 table. It supports only finite guarded rollout statements. It is included to
 make optional execution honest, not to inflate the scope of the paper.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.80\linewidth]{v3_artifact_surface.pdf}
-    \caption{V3 artifact surface. The cache inventories source, paper, result, test, script, and documentation artifacts while excluding the generated v3 cache itself.}
-    \label{fig:v3-artifact-surface}
+    \includegraphics[width=0.80\linewidth]{v4_artifact_surface.pdf}
+    \caption{V4 artifact surface. The cache inventories source, paper, result, test, script, and documentation artifacts while excluding the generated V4 cache itself.}
+    \label{fig:V4-artifact-surface}
 \end{figure}
 
 \subsection{Benchmark-readiness checklist}
-\label{app:v3-benchmark-readiness}
+\label{app:V4-benchmark-readiness}
 
 A future benchmark or robot extension should satisfy the following conditions
 before upgrading the claim tier:
@@ -521,27 +521,27 @@ single final success rate cannot answer whether high-\(N\) energy optimization
 selected a useful action tail or merely benefited from a proposal prior.
 
 \subsection{Submission-readiness checklist}
-\label{app:v3-submission-checklist}
+\label{app:V4-submission-checklist}
 
-Before v3 is treated as final, the following checks must pass:
+Before V4 is treated as final, the following checks must pass:
 \begin{enumerate}
-\item Run \texttt{python experiments/v3\_cached\_evidence.py}.
-\item Run \texttt{python scripts/build\_v3\_paper.py}.
+\item Run \texttt{python experiments/v4\_frozen\_evidence.py}.
+\item Run \texttt{python scripts/build\_v4\_paper.py}.
 \item Verify that the repository final PDF exists under \texttt{paper/final}.
 \item Verify that the Desktop PDF is
-\texttt{ebm-policy-best-of-n-v3.pdf}.
+\texttt{ebm-policy-best-of-n-v4.pdf}.
 \item Verify that repository and Desktop PDF hashes match.
 \item Verify that the final PDF has at least \(25\) pages.
-\item Verify that the Desktop source map points to the v3 PDF, this folder,
+\item Verify that the Desktop source map points to the V4 PDF, this folder,
 and \texttt{Jason-Wang313/ebm-policy-best-of-n}.
 \item Verify that no stale Desktop v2 PDF remains.
-\item Run \texttt{python scripts/run\_v3\_claim\_audit.py}.
+\item Run \texttt{python scripts/run\_v4\_claim\_audit.py}.
 \item Run \texttt{bash scripts/run\_claim\_audit.sh}.
 \item Run \texttt{python -m pytest -q}.
 \item Compile-check the new Python scripts.
 \item Check that the LaTeX log has no fatal errors, undefined citations, or
 undefined references after the final pass.
-\item Render representative pages and inspect the title page, v3 evidence
+\item Render representative pages and inspect the title page, V4 evidence
 figures, dependency audit, artifact appendix, and final checklist.
 \item Commit and push to GitHub, then verify that the remote SHA matches the
 local commit.
@@ -549,15 +549,15 @@ local commit.
 
 The checklist is operational because the final artifact must be useful to a
 fresh session. A new agent should not infer the right folder from memory. It
-should read the Desktop source map, open this repository, run the v3 audit,
+should read the Desktop source map, open this repository, run the V4 audit,
 and find the exact Desktop PDF.
 
 \subsection{Area-chair decision simulation}
-\label{app:v3-ac-simulation}
+\label{app:V4-ac-simulation}
 
 An area chair can read this paper in two ways. The negative reading is that
 the work is still controlled and simulator-bound, with no real robot and no
-autonomous learned-policy Meta-World claim. V3 accepts that criticism. The
+autonomous learned-policy Meta-World claim. V4 accepts that criticism. The
 positive reading is that the paper identifies a precise inference-time failure
 mode for EBM policies, supplies exact selected-tail accounting, demonstrates
 the mechanism in controlled and learned EBM artifacts, and reports repair and
@@ -578,7 +578,7 @@ reproducible way to measure when that tail is useful or harmful. That is a
 coherent contribution as long as the scope remains honest.
 
 \subsection{Detailed experiment protocol}
-\label{app:v3-detailed-protocol}
+\label{app:V4-detailed-protocol}
 
 The controlled protocol begins with a finite candidate pool. Each candidate
 has an observation, an action, an energy assigned by a scorer, and a measured
@@ -599,7 +599,7 @@ The learned NumPy IBC-style model is intentionally small and
 observation-limited. It tests whether the failure survives a learned energy
 surface rather than only a hand-written scorer. The learned PyTorch model is a
 contrast case: it trains with a decreasing InfoNCE-style contrastive loss and
-produces an aligned-tail selected-utility curve. V3 includes both because a
+produces an aligned-tail selected-utility curve. V4 includes both because a
 paper with only the failing learned case could be read as saying all EBMs are
 bad, while a paper with only the aligned case would hide the deployment-tail
 failure.
@@ -617,7 +617,7 @@ reward and success honestly, including zero-success rows. It does not support
 claims about broad manipulation, real robots, or general EBM policy quality.
 
 \subsection{Negative controls and ablations}
-\label{app:v3-negative-controls}
+\label{app:V4-negative-controls}
 
 The paper includes negative controls because selected-tail papers are easy to
 overstate. The oracle scorer is a positive control: if the scorer is perfectly
@@ -644,7 +644,7 @@ into one success table, the benchmark could quietly inherit success from
 proposal structure and make the EBM look more autonomous than it is.
 
 \subsection{Figure-by-figure reading guide}
-\label{app:v3-figure-guide}
+\label{app:V4-figure-guide}
 
 \paragraph{Figure~\ref{fig:energy-utility-drop}.}
 This is the headline failure figure. Read energy and real utility together.
@@ -672,33 +672,33 @@ learned-proposal, state-heuristic, random, and scripted variants. If a reader
 cares about autonomous learned-policy success, this is the figure that keeps
 the claim unsupported.
 
-\paragraph{Figure~\ref{fig:v3-tail-matrix}.}
+\paragraph{Figure~\ref{fig:V4-tail-matrix}.}
 This figure condenses the high-\(N\) controlled audit. It is useful when a
 reviewer asks whether the paper is cherry-picking a single row. The matrix
 shows which scorer families have negative selected utility at \(N=512\) and
 which do not.
 
-\paragraph{Figure~\ref{fig:v3-repair-dependency}.}
+\paragraph{Figure~\ref{fig:V4-repair-dependency}.}
 The left panel checks whether repair recovery clears the threshold across
 repair models. The right panel checks whether simulator success survives
 dependency decomposition. Together they prevent the paper from claiming a
 repair or simulator result without stating its assumptions.
 
-\paragraph{Figure~\ref{fig:v3-boundaries}.}
+\paragraph{Figure~\ref{fig:V4-boundaries}.}
 This figure is not decorative. It makes the claim ledger visible. A paper can
 be strong while keeping unsupported endpoints unsupported. The optional
 rollout panel makes clear that optional adapters are finite execution
 artifacts.
 
-\paragraph{Figure~\ref{fig:v3-artifact-surface}.}
+\paragraph{Figure~\ref{fig:V4-artifact-surface}.}
 This is a maintenance figure. It helps a fresh agent see that the final paper
 is tied to source, scripts, tests, docs, figures, tables, and generated
 summaries rather than a manually edited PDF.
 
 \subsection{Claim tiers and upgrade policy}
-\label{app:v3-claim-tiers}
+\label{app:V4-claim-tiers}
 
-V3 uses four claim tiers. Tier 1 is exact selected-tail accounting. These
+V4 uses four claim tiers. Tier 1 is exact selected-tail accounting. These
 claims are strongest because they follow from a finite identity and are
 validated by Monte Carlo. Tier 1 includes the tie-aware selected-utility law
 and exact-law validation.
@@ -719,7 +719,7 @@ help.
 Tier 4 is external robotics validation. This tier would require real hardware
 or high-fidelity benchmark evidence with fixed splits, candidate-level logs,
 measured utility, deployment gates fixed before evaluation, and failure rows
-published. V3 discusses this tier as future work and a benchmark-readiness
+published. V4 discusses this tier as future work and a benchmark-readiness
 checklist, not as an achieved result.
 
 The upgrade policy is conservative. A future revision may promote a boundary
@@ -727,16 +727,16 @@ only if the repository contains artifacts for that endpoint and the claim
 audit is updated to require them. Prose alone cannot upgrade a claim tier.
 
 \subsection{Resource and reproducibility policy}
-\label{app:v3-resource-policy}
+\label{app:V4-resource-policy}
 
 The full experiment stack is CPU-feasible but not cheap. The final audit docs
 record a long Meta-World refresh and a roughly thousand-second full run. That
 is acceptable for regeneration, but it is not acceptable as a required step
-for every paper compile. V3 therefore separates experiment regeneration from
+for every paper compile. V4 therefore separates experiment regeneration from
 submission verification.
 
 Submission verification is the path a fresh session should run first. It
-executes the v3 cache, rebuilds the PDF, runs the claim audit, checks the
+executes the V4 cache, rebuilds the PDF, runs the claim audit, checks the
 tests, verifies hashes, and inspects representative rendered pages. This path
 does not retrain EBMs or rerun simulators. It keeps memory low by streaming
 CSV/JSON artifacts and writing compact outputs.
@@ -744,38 +744,38 @@ CSV/JSON artifacts and writing compact outputs.
 Full regeneration is the path for reviewers who want to rebuild the evidence
 from code. It runs the controlled tasks, learned EBMs, repair studies,
 Meta-World ladder, optional adapters, figures, claim audit, and tests. If
-full regeneration changes artifacts, the v3 cache and manuscript must be
+full regeneration changes artifacts, the V4 cache and manuscript must be
 rebuilt before the PDF is treated as final. A paper cannot be submission-ready
 if its PDF cites stale numbers.
 
 \subsection{Fresh-session archive contract}
-\label{app:v3-archive-contract}
+\label{app:V4-archive-contract}
 
 A fresh session should use the Desktop source map as the first lookup table.
-For this paper, the final row must identify \texttt{ebm-policy-best-of-n-v3.pdf},
+For this paper, the final row must identify \texttt{ebm-policy-best-of-n-v4.pdf},
 the local folder \texttt{C:/Users/wangz/ebm-policy-best-of-n}, and the GitHub
 repository \texttt{Jason-Wang313/ebm-policy-best-of-n}. The folder name is the
 source of truth. The PDF name and GitHub repository name should point back to
 that folder without guesswork.
 
 Inside the repository, the final versioned PDF belongs at
-\texttt{paper/final/ebm-policy-best-of-n-v3.pdf}. The anonymous LaTeX build
+\texttt{paper/final/ebm-policy-best-of-n-v4.pdf}. The anonymous LaTeX build
 PDF under \texttt{paper/iclr2026/build/main.pdf} is a local build product, not
 the versioned artifact. The Desktop PDF must match the repository final PDF
 byte-for-byte.
 
 The archive contract also requires that old Desktop v2 PDFs be absent or
-superseded. If a future agent sees both v2 and v3 on the visible Desktop, it
-may choose the wrong file. V3 therefore treats stale Desktop versions as an
+superseded. If a future agent sees both v2 and V4 on the visible Desktop, it
+may choose the wrong file. V4 therefore treats stale Desktop versions as an
 audit failure.
 
 \subsection{How to reject or accept correctly}
-\label{app:v3-reject-accept}
+\label{app:V4-reject-accept}
 
 A correct rejection should say that the controlled and simulator evidence is
 not enough for the desired venue or claim tier. It should not say the paper
 claims real-robot validation, autonomous learned-policy success, or broad
-manipulation success, because v3 explicitly blocks those claims. It should not
+manipulation success, because V4 explicitly blocks those claims. It should not
 say high \(N\) always hurts, because the paper reports aligned and oracle
 cases where high \(N\) helps or saturates.
 
@@ -793,7 +793,7 @@ validation with fixed gates and candidate-pool oracle metrics. A request for
 "more experiments" without specifying the claim tier would be less useful.
 
 \subsection{External validation protocol}
-\label{app:v3-external-protocol}
+\label{app:V4-external-protocol}
 
 An external validation should begin by freezing tasks, observations, candidate
 generators, energy scorers, and gates. The selected-tail question becomes
@@ -820,33 +820,33 @@ claims should identify whether candidate proposals still depend on expert
 actions, nearest-demo retrieval, behavior cloning, state heuristics, or local
 Gaussian sampling.
 
-\subsection{What v3 intentionally does not prove}
-\label{app:v3-not-proved}
+\subsection{What V4 intentionally does not prove}
+\label{app:V4-not-proved}
 
-V3 does not prove that EBMs are bad robot policies. The aligned PyTorch EBM and
+V4 does not prove that EBMs are bad robot policies. The aligned PyTorch EBM and
 oracle/good scorer rows are included to block that reading. The paper proves
 that a selected-tail audit is necessary when the policy deploys by optimizing
 energy over candidates.
 
-V3 does not prove that more candidates are bad. More candidates are useful when
+V4 does not prove that more candidates are bad. More candidates are useful when
 the low-energy tail has high real utility. The failure is conditional on tail
 miscalibration.
 
-V3 does not prove that support penalties or calibration always fix selected
+V4 does not prove that support penalties or calibration always fix selected
 tails. The repair stack is strong under the measured local stress tests. It is
 not a universal method, and it is not a safety certificate under distribution
 shift.
 
-V3 does not prove broad manipulation success. The simulator ladder and optional
+V4 does not prove broad manipulation success. The simulator ladder and optional
 adapters are useful artifacts, but their boundaries are explicit. Real-robot
 validation remains absent.
 
-V3 does not claim the finite law as a standalone novelty. The law is an audit
+V4 does not claim the finite law as a standalone novelty. The law is an audit
 instrument. The EBM-specific contribution is the low-energy-tail framing, the
 diagnostic stack, and the dependency-aware evidence package.
 
 \subsection{Failure-case walk-throughs}
-\label{app:v3-failure-walkthroughs}
+\label{app:V4-failure-walkthroughs}
 
 The strongest controlled failure can be read as a five-step story. First, the
 candidate generator proposes a finite action pool. Second, the raw
@@ -855,8 +855,8 @@ invalid or far from support. Third, increasing \(N\) increases the probability
 that at least one of those low-energy bad actions appears in the sampled set.
 Fourth, the deployment rule selects that low-energy action. Fifth, real
 utility falls even though the energy objective has improved. The selected
-energy \VThreeEBMRawHighNEnergy{} and selected utility
-\VThreeEBMRawHighNUtility{} in the strongest row are a compact instance of
+energy \VFourEBMRawHighNEnergy{} and selected utility
+\VFourEBMRawHighNUtility{} in the strongest row are a compact instance of
 this story.
 
 The repair walk-through is different. The repair does not change the finite
@@ -879,16 +879,16 @@ low-dependency simulator evidence, not as learned-policy autonomy.
 The optional adapter walk-through is the narrowest. A finite adapter rollout
 may report reward and even nonzero scripted success. That proves the adapter
 ran and the logging path works. It does not prove that a learned EBM policy
-solved a suite. V3 includes optional adapters to prevent future confusion:
+solved a suite. V4 includes optional adapters to prevent future confusion:
 rows with zero success or unavailable success remain visible rather than being
 silently omitted.
 
 \subsection{Robustness questions}
-\label{app:v3-robustness-questions}
+\label{app:V4-robustness-questions}
 
 \paragraph{Does the conclusion depend on one seed?}
-The controlled artifacts use \VThreeEBMControlledSeeds{} seeds and
-\VThreeEBMHighNRows{} high-\(N\) summary rows. The paper should not claim a
+The controlled artifacts use \VFourEBMControlledSeeds{} seeds and
+\VFourEBMHighNRows{} high-\(N\) summary rows. The paper should not claim a
 large statistical population, but it is also not a single anecdotal rollout.
 The seed-level tables remain in the repository for reviewers who want to check
 heterogeneity.
@@ -917,7 +917,7 @@ is promoted only because it clears the metric-bound thresholds while weaker
 deployable ablations and stronger upper bounds remain visible.
 
 \subsection{Table-level sanity assertions}
-\label{app:v3-table-sanity}
+\label{app:V4-table-sanity}
 
 The controlled summary table should satisfy three sanity checks. The oracle or
 good rows should not exhibit the same high-\(N\) collapse as raw
@@ -927,15 +927,15 @@ actions. The selected utility should be evaluated by the external utility, not
 by the energy itself.
 
 The reliability table should contain extreme-tail rows. If it only reported
-average buckets, it would miss the deployment object. V3 records
-\VThreeEBMReliabilityExtremeRows{} extreme-tail rows. A reviewer can therefore
+average buckets, it would miss the deployment object. V4 records
+\VFourEBMReliabilityExtremeRows{} extreme-tail rows. A reviewer can therefore
 inspect whether the very low-energy tail has high utility, low invalid rate,
 and reasonable support distance.
 
 The repair table should report failures and utility-degrading rows. A repair
-paper that hides failures is not audit-ready. V3 reports
-\VThreeEBMRepairFailures{} diagnostic repair failure and
-\VThreeEBMRepairDegrades{} utility-degrading rows for the main repair stack.
+paper that hides failures is not audit-ready. V4 reports
+\VFourEBMRepairFailures{} diagnostic repair failure and
+\VFourEBMRepairDegrades{} utility-degrading rows for the main repair stack.
 The failure count is what prevents the paper from drifting into universal
 repair language.
 
@@ -949,10 +949,10 @@ claim.
 
 The optional adapter table should include zero-success rows and unavailable
 success rows. Otherwise optional benchmarks become marketing evidence rather
-than scientific evidence. V3 treats them as finite guarded rollouts.
+than scientific evidence. V4 treats them as finite guarded rollouts.
 
 \subsection{Author-response templates}
-\label{app:v3-author-response}
+\label{app:V4-author-response}
 
 \paragraph{If asked for more robotics.}
 We agree that real-robot validation would strengthen and broaden the paper.
@@ -991,7 +991,7 @@ state-heuristic low-dependency variants clear the threshold, while autonomous
 learned-policy success remains unsupported.
 
 \subsection{Final adversarial checklist}
-\label{app:v3-adversarial-checklist}
+\label{app:V4-adversarial-checklist}
 
 Before accepting the paper's own claims, a reviewer should be able to answer
 the following questions from artifacts:
@@ -1012,25 +1012,25 @@ boundaries?
 \item Do the repo PDF and Desktop PDF have the same hash?
 \end{enumerate}
 
-If any answer is missing, the v3 artifact is not submission-ready. If all
+If any answer is missing, the V4 artifact is not submission-ready. If all
 answers are present, the remaining debate is about claim tier and venue fit,
 not about whether the paper hid its evidence.
 
 \subsection{Fresh-agent invariants}
-\label{app:v3-fresh-agent-invariants}
+\label{app:V4-fresh-agent-invariants}
 
 The final artifact is designed for a future session that has no memory of this
 conversation. That session should be able to verify five invariants. First,
 the Desktop source map names the final PDF, the local folder, and the GitHub
-repository. Second, the repository contains the final v3 PDF under
+repository. Second, the repository contains the final V4 PDF under
 \texttt{paper/final}. Third, the Desktop PDF and repository PDF have identical
-hashes. Fourth, the v3 audit script can regenerate the evidence cache and
+hashes. Fourth, the V4 audit script can regenerate the evidence cache and
 confirm the page count. Fifth, the remote GitHub branch points to the commit
 that contains the final PDF and scripts.
 
 The second invariant is especially important because the LaTeX build
 directory is not the archive. A local build product can be deleted and
-recreated. The final v3 PDF is the committed artifact a reviewer or future
+recreated. The final V4 PDF is the committed artifact a reviewer or future
 agent should compare against the Desktop copy. This avoids the common error
 of submitting an old build PDF while the repository source has moved on.
 
@@ -1041,8 +1041,8 @@ newer from modification times.
 
 The fourth invariant keeps the evidence tied to the manuscript. If a future
 experiment regeneration changes selected utility, repair recovery, or
-dependency rows, the v3 cache will change. The macros and figures must then be
-rebuilt before the paper is final again. This is why the v3 manuscript cites
+dependency rows, the V4 cache will change. The macros and figures must then be
+rebuilt before the paper is final again. This is why the V4 manuscript cites
 generated macros instead of manually typing every headline number.
 
 The fifth invariant makes GitHub part of submission readiness. A local PDF on
@@ -1051,7 +1051,7 @@ recover the scripts, artifacts, and final PDF from the repository. The final
 audit should therefore include both local checks and remote SHA verification.
 
 \subsection{Reviewer scorecard}
-\label{app:v3-scorecard}
+\label{app:V4-scorecard}
 
 A reviewer who values theoretical cleanliness should give credit for the
 finite tie-aware selected-utility law, but should not treat the law as the
@@ -1060,7 +1060,7 @@ selected-tail curves exact for fixed pools.
 
 A reviewer who values empirical rigor should check whether the paper reports
 negative controls, positive controls, learned artifacts, repair ablations,
-dependency audits, and optional adapter boundaries. V3 exposes all of these.
+dependency audits, and optional adapter boundaries. V4 exposes all of these.
 The remaining weakness is scale and external validation, not absence of local
 artifact rigor.
 
@@ -1077,20 +1077,19 @@ Those are the identity features that separate it from other tail-selection
 papers.
 
 A reviewer who worries about overclaiming should inspect the non-claim
-boundaries. V3 does not hide unsupported endpoints. It lists them and makes
+boundaries. V4 does not hide unsupported endpoints. It lists them and makes
 the claim audit fail if promoted prose claims them.
 
 The final scorecard is therefore mixed but defensible: strong mechanism,
 strong artifact discipline, clear repair metrics, honest simulator boundaries,
 missing real robot, and no autonomous learned-policy claim. That is the paper
-the v3 artifact actually supports.
+the V4 artifact actually supports.
 
 \subsection{Reproducibility commands}
 
 The anonymous paper PDF can be rebuilt from the repository root with:
 \begin{center}
 \small
-\texttt{powershell -ExecutionPolicy Bypass -File}\\
-\texttt{scripts/build\_iclr\_paper.ps1}
+\texttt{python scripts/build\_v4\_paper.py}
 \end{center}
-The claim audit can be run with \texttt{bash scripts/run\_claim\_audit.sh}. The test suite can be run with \texttt{pytest}. Long simulator refreshes are intentionally not required for rebuilding the paper because the paper consumes the existing CSV/JSON/PNG artifacts.
+The final claim audit can be run with \texttt{python scripts/run\_v4\_claim\_audit.py}. The test suite can be run with \texttt{python -m pytest -q}. Long simulator refreshes are intentionally not required for rebuilding the paper because the paper consumes the existing CSV/JSON/PNG artifacts.
