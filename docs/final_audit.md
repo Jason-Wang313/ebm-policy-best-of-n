@@ -1,5 +1,16 @@
 # Final Audit
 
+Verification date: 2026-06-19.
+
+## Current Final Package
+
+- Final repository PDF: `paper/final/ebm-policy-best-of-n-v4.pdf`.
+- Final Desktop PDF: `C:\Users\wangz\OneDrive\Desktop\ebm-policy-best-of-n-v4.pdf`.
+- Final PDF SHA-256: `48E9D2DC983A074F683EAF6629374B32E9E447B6F92E86DA1E6ABCDDCA34983E`.
+- Final PDF pages: 27.
+- Matching GitHub repository: `https://github.com/Jason-Wang313/ebm-policy-best-of-n.git`.
+- Visual QA inspected rendered pages 1, 5, 8, 13, 18, 22, and 27.
+
 ## V4 Submission Package
 
 V4 adds a frozen adversarial evidence layer without rerunning the heavy
@@ -12,13 +23,19 @@ Meta-World stack. The build path is:
 Current v4 frozen evidence is under `results/v4_frozen_evidence/`. It reports
 9/9 passing claim gates, 36 Meta-World selected-action confidence rows, 12
 closed-loop dependency stress rows, 16 reliability tail-gap rows, 51
-compute-frontier utility-drop steps, 151 audited non-cache files, and 9 v4
+compute-frontier utility-drop steps, 161 audited non-cache files, and 9 v4
 figures. The final versioned PDF is
 `paper/final/ebm-policy-best-of-n-v4.pdf` and the visible Desktop copy must
 have the same SHA-256 hash.
 
 ## 1. Required Command Results
 
+- `python -m compileall src tests experiments scripts -q`: PASS on 2026-06-19.
+- `python -m pytest -q`: PASS on 2026-06-19, `31 passed`.
+- `python scripts/build_v4_paper.py`: PASS on 2026-06-19; regenerated frozen evidence, rebuilt the repo PDF, and copied the final PDF to the Desktop.
+- Final LaTeX log blocker scan: PASS on 2026-06-19; no undefined citations/references, rerun warnings, overfull boxes, or fatal errors.
+- `python scripts/run_v4_claim_audit.py`: PASS on 2026-06-19, `pages=27`, SHA-256 placeholder replaced after final deterministic rebuild.
+- Visual PDF QA: PASS on rendered pages 1, 5, 8, 13, 18, 22, and 27.
 - `python experiments/run_metaworld_benchmark.py`: PASS, 1334.1 s for the full twelve-variant, five-seed, four-task Meta-World child cache refresh; later aggregate refreshes reused the versioned child artifacts.
 - `bash scripts/run_smoke.sh`: PASS, 556.7 s.
 - `bash scripts/run_all.sh`: PASS, 978.2 s observed wall time on the final full run. The Meta-World stage used versioned task/seed child artifacts and rewrote the aggregate CSV/JSON outputs.
@@ -156,6 +173,11 @@ Regenerated figure set:
 - 0 PARTIAL promoted claim categories.
 - 0 UNSUPPORTED promoted claim categories.
 - 18/18 not-clone checks passed.
+
+Current v4 acceptance gates also require the repo and Desktop PDFs to share the
+same SHA-256 hash, the Desktop source map to point to this v4 PDF/folder/repo
+triple, the old v2/v3 Desktop PDFs to be absent, and the final commit to be
+pushed to GitHub with a verified remote SHA.
 
 Unsupported endpoints are listed separately as non-claim boundaries:
 
