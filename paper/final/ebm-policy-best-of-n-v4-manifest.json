@@ -4,7 +4,7 @@
   "github_remote": "https://github.com/Jason-Wang313/ebm-policy-best-of-n.git",
   "repository_pdf": "paper/final/ebm-policy-best-of-n-v4.pdf",
   "desktop_pdf": "C:\\Users\\wangz\\OneDrive\\Desktop\\ebm-policy-best-of-n-v4.pdf",
-  "sha256": "48E9D2DC983A074F683EAF6629374B32E9E447B6F92E86DA1E6ABCDDCA34983E",
+  "sha256": "A6124DE496478594D6263CAFA5BA35AA274702CF031FD5A7099238491376EA6D",
   "pages": 27,
   "verified_on": "2026-06-19",
   "checks": {
@@ -14,9 +14,11 @@
     "paper_build": "passed",
     "claim_audit": "EBM policy V4 audit passed.",
     "latex_final_log_scan": "passed",
+    "boxed_link_rebuild_from_frozen_artifacts": "passed",
+    "pdf_annotation_link_audit": "59 annotations: 36 green citation boxes, 23 red internal-reference boxes; all use 1pt visible borders",
     "repo_desktop_hash_match": true,
-    "pdf_render": "all 27 pages rendered",
-    "visual_qa": "pages 1, 5, 8, 13, 18, 22, and 27 inspected"
+    "pdf_render": "selected high-risk pages rendered at moderate DPI",
+    "visual_qa": "pages 1, 2, 3, 4, 5, 6, 7, 10, 21, 22, and 27 inspected"
   },
   "evidence_summary": {
     "artifact_files": 161,

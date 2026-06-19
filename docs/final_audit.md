@@ -6,10 +6,11 @@ Verification date: 2026-06-19.
 
 - Final repository PDF: `paper/final/ebm-policy-best-of-n-v4.pdf`.
 - Final Desktop PDF: `C:\Users\wangz\OneDrive\Desktop\ebm-policy-best-of-n-v4.pdf`.
-- Final PDF SHA-256: `48E9D2DC983A074F683EAF6629374B32E9E447B6F92E86DA1E6ABCDDCA34983E`.
+- Final PDF SHA-256: `A6124DE496478594D6263CAFA5BA35AA274702CF031FD5A7099238491376EA6D`.
 - Final PDF pages: 27.
 - Matching GitHub repository: `https://github.com/Jason-Wang313/ebm-policy-best-of-n.git`.
-- Visual QA inspected rendered pages 1, 5, 8, 13, 18, 22, and 27.
+- Visual QA inspected rendered pages 1, 2, 3, 4, 5, 6, 7, 10, 21, 22, and 27.
+- PDF annotation link audit found 59 annotations: 36 green citation boxes and 23 red internal-reference boxes, all using 1pt visible borders.
 
 ## V4 Submission Package
 
@@ -34,8 +35,9 @@ have the same SHA-256 hash.
 - `python -m pytest -q`: PASS on 2026-06-19, `31 passed`.
 - `python scripts/build_v4_paper.py`: PASS on 2026-06-19; regenerated frozen evidence, rebuilt the repo PDF, and copied the final PDF to the Desktop.
 - Final LaTeX log blocker scan: PASS on 2026-06-19; no undefined citations/references, rerun warnings, overfull boxes, or fatal errors.
-- `python scripts/run_v4_claim_audit.py`: PASS on 2026-06-19, `pages=27`, SHA-256 placeholder replaced after final deterministic rebuild.
-- Visual PDF QA: PASS on rendered pages 1, 5, 8, 13, 18, 22, and 27.
+- `python scripts/run_v4_claim_audit.py`: PASS on 2026-06-19, `pages=27`, SHA-256 `A6124DE496478594D6263CAFA5BA35AA274702CF031FD5A7099238491376EA6D`.
+- Boxed-link rebuild from frozen artifacts: PASS on 2026-06-19; repository and Desktop PDFs match.
+- Visual PDF QA: PASS on rendered pages 1, 2, 3, 4, 5, 6, 7, 10, 21, 22, and 27.
 - `python experiments/run_metaworld_benchmark.py`: PASS, 1334.1 s for the full twelve-variant, five-seed, four-task Meta-World child cache refresh; later aggregate refreshes reused the versioned child artifacts.
 - `bash scripts/run_smoke.sh`: PASS, 556.7 s.
 - `bash scripts/run_all.sh`: PASS, 978.2 s observed wall time on the final full run. The Meta-World stage used versioned task/seed child artifacts and rewrote the aggregate CSV/JSON outputs.
